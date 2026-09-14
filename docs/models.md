@@ -15,7 +15,7 @@
 | الحقل | النوع | ملاحظات |
 |-------|------|---------|
 | `national_id` | `CharField(max_length=10, unique=True, blank=True, null=True)` | الهوية الوطنية / الإقامة. مفتاح دخول المشارك. |
-| `username` | `CharField(max_length=30, unique=True, blank=True, null=True)` | اسم المستخدم. مفتاح دخول المشرفين. |
+| `username` | `CharField(max_length=30, unique=True, blank=True, null=True)` | اسم المستخدم. مفتاح دخول المشرفات. |
 | `role` | `CharField(max_length=30, choices=Role.choices)` | الدور. لا قيمة افتراضية. |
 | `full_name` | `CharField(max_length=100, blank=True)` | الاسم الكامل. |
 | `is_active` | `BooleanField(default=True)` | يُفحص في الـ backend. |
@@ -33,7 +33,7 @@
 
 ### `PasswordResetRequest` — `accounts/models.py`, كلاس `PasswordResetRequest`
 
-طلب استرجاع كلمة مرور من مشارك، يعالجه المشرف العام.
+طلب استرجاع كلمة مرور من مشارك، تعالجه المشرفة العامة.
 
 | الحقل | النوع | ملاحظات |
 |-------|------|---------|
@@ -41,7 +41,7 @@
 | `requested_at` | `DateTimeField(auto_now_add=True)` | — |
 | `resolved` | `BooleanField(default=False)` | — |
 | `resolved_at` | `DateTimeField(null=True, blank=True)` | — |
-| `resolved_by` | `FK(AUTH_USER_MODEL, on_delete=SET_NULL, null=True, blank=True, related_name="+")` | المشرف الذي وافق. |
+| `resolved_by` | `FK(AUTH_USER_MODEL, on_delete=SET_NULL, null=True, blank=True, related_name="+")` | المشرفة التي وافقت. |
 
 `Meta.ordering = ["-requested_at"]`.
 
@@ -54,19 +54,19 @@
 `grade_5`=خامس ابتدائي، `grade_6`=سادس ابتدائي، `grade_7`=أول متوسط،
 `grade_8`=ثاني متوسط، `grade_9`=ثالث متوسط.
 
-### `Group` (بيئة) — `participants/models.py`, كلاس `Group`
+### `Group` (فصل) — `participants/models.py`, كلاس `Group`
 
 | الحقل | النوع | ملاحظات |
 |-------|------|---------|
-| `name` | `CharField(max_length=50, unique=True)` | اسم البيئة. المطابقة في الاستيراد تتم بالاسم الدقيق. |
-| `supervisor` | `ManyToManyField(AUTH_USER_MODEL, blank=True, limit_choices_to={"role": GROUP_SUPERVISOR})` | **⚠️ تغيّر مؤخرًا من `ForeignKey` إلى `ManyToManyField`** — بيئة واحدة يمكن أن يكون لها **أكثر من مشرف بيئة**. بدون `related_name` → العلاقة العكسية من `User` لا تزال `group_set` (نفس اسم العلاقة العكسية الافتراضي لكل من `ForeignKey` و`ManyToManyField` غير المسمّاة)، لذا كود مثل `request.user.group_set.first()` يستمر بالعمل دون تعديل، لكنه الآن يُرجع **بيئة واحدة عشوائية من عدة محتملة** إن كان للمستخدم أكثر من بيئة، وليس بالضرورة "بيئته الوحيدة". أدمن Django يعرض هذا الحقل بأداة `filter_horizontal` (قائمة مزدوجة لاختيار عدة مشرفين). |
+| `name` | `CharField(max_length=50, unique=True)` | اسم الفصل. المطابقة في الاستيراد تتم بالاسم الدقيق. |
+| `supervisor` | `ManyToManyField(AUTH_USER_MODEL, blank=True, limit_choices_to={"role": GROUP_SUPERVISOR})` | **⚠️ تغيّر مؤخرًا من `ForeignKey` إلى `ManyToManyField`** — فصل واحد يمكن أن يكون له **أكثر من مشرفة فصل**. بدون `related_name` → العلاقة العكسية من `User` لا تزال `group_set` (نفس اسم العلاقة العكسية الافتراضي لكل من `ForeignKey` و`ManyToManyField` غير المسمّاة)، لذا كود مثل `request.user.group_set.first()` يستمر بالعمل دون تعديل، لكنه الآن يُرجع **فصلًا واحدًا عشوائيًا من عدة محتملة** إن كان للمستخدمة أكثر من فصل، وليس بالضرورة "فصلها الوحيد". أدمن Django يعرض هذا الحقل بأداة `filter_horizontal` (قائمة مزدوجة لاختيار عدة مشرفات). |
 
 ### `Participant` (مشارك) — `participants/models.py`, كلاس `Participant`
 
 | الحقل | النوع | ملاحظات |
 |-------|------|---------|
 | `user` | `OneToOneField(AUTH_USER_MODEL, on_delete=CASCADE)` | **بدون `related_name`** → الوصول عبر `user.participant`. |
-| `group` | `FK(Group, on_delete=SET_NULL, null=True, related_name="participants")` | البيئة. |
+| `group` | `FK(Group, on_delete=SET_NULL, null=True, related_name="participants")` | الفصل. |
 | `miles` | `PositiveIntegerField(default=0)` | الأميال. |
 | `points` | `PositiveIntegerField(default=0)` | النقاط. |
 | `purchase_points` | `PositiveIntegerField(default=0)` | النقاط الشرائية. |
@@ -90,7 +90,7 @@
 | `date` | `DateField` | تاريخ اليوم. |
 | `attended` | `BooleanField(default=False)` | حضر؟ = 3 نقاط. |
 | `achieved` | `BooleanField(default=False)` | أنجز؟ = 2 نقطة. مستقل عن `attended`. |
-| `recorded_by` | `FK(AUTH_USER_MODEL, on_delete=SET_NULL, null=True, limit_choices_to={"role": GROUP_SUPERVISOR})` | من سجّله (قد يكون مشرفًا عامًا فعليًا — القيد للأدمن فقط، لا يُفرض على مستوى الـ View أو قاعدة البيانات). |
+| `recorded_by` | `FK(AUTH_USER_MODEL, on_delete=SET_NULL, null=True, limit_choices_to={"role": GROUP_SUPERVISOR})` | من سجّله (قد تكون مشرفة عامة فعليًا — القيد للأدمن فقط، لا يُفرض على مستوى الـ View أو قاعدة البيانات). |
 
 `Meta.constraints`: `UniqueConstraint(fields=["participant", "date"], name="unique_circle_attendance_per_day")` — **سجل واحد لكل مشارك في اليوم**.
 
@@ -118,7 +118,7 @@
 | `participant` | `FK(Participant, on_delete=CASCADE, related_name="weekly_activity_attendances")` | — |
 | `date` | `DateField` | تاريخ الفعالية. |
 | `attended` | `BooleanField(default=False)` | حاضر؟ = 10 نقاط (كامل، بلا تدرّج). |
-| `recorded_by` | `FK(AUTH_USER_MODEL, on_delete=SET_NULL, null=True)` | **بدون `limit_choices_to`** (خلافًا لـ `CircleAttendance`/`MeetingAttendance`) — منطقي لأن هذه الفعالية يسجّلها أيضًا المشرف العام/النظام، لا مشرف البيئة فقط. |
+| `recorded_by` | `FK(AUTH_USER_MODEL, on_delete=SET_NULL, null=True)` | **بدون `limit_choices_to`** (خلافًا لـ `CircleAttendance`/`MeetingAttendance`) — منطقي لأن هذه الفعالية تسجّلها أيضًا المشرفة العامة/النظام، لا مشرفة الفصل فقط. |
 
 `Meta.constraints`: `UniqueConstraint(fields=["participant", "date"], name="unique_weekly_activity_per_day")`.
 

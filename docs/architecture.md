@@ -7,7 +7,7 @@
 
 ## نظرة عامة
 
-مشروع **أُفق** تطبيق Django واحد (`config`) يضم تطبيقين اثنين فقط:
+مشروع **جُمان** تطبيق Django واحد (`config`) يضم تطبيقين اثنين فقط:
 
 | التطبيق | المسؤولية | الاعتماد |
 |---------|-----------|----------|
@@ -40,7 +40,7 @@
   `USERNAME_FIELD = "username"`.
 - **`participants.Participant`** (`participants/models.py`) علاقة
   **`OneToOneField`** مع `User` (`on_delete=CASCADE`). يحمل **البيانات
-  البرنامجية فقط**: البيئة (`group`)، العملات الثلاث (`miles`, `points`,
+  البرنامجية فقط**: الفصل (`group`)، العملات الثلاث (`miles`, `points`,
   `purchase_points`)، أرقام الجوال، المرحلة الدراسية.
 
 الفائدة: تطبيق `accounts` يبقى نقيًا للمصادقة، ويمكن أن يوجد `User` من أي دور
@@ -51,21 +51,21 @@
 `request.user.participant` (انظر مثلًا طريقة
 `ParticipantDashboardView.get_context_data`).
 
-## ربط مشرف البيئة ببيئته/بيئاته
+## ربط مشرفة الفصل بفصلها/فصولها
 
 > **⚠️ تغيّر معماري مهم**: هذا القسم كان يصف `Group.supervisor` كـ
-> `ForeignKey` بمشرف واحد لكل بيئة. الحقل **تحوّل إلى `ManyToManyField`** —
+> `ForeignKey` بمشرفة واحدة لكل فصل. الحقل **تحوّل إلى `ManyToManyField`** —
 > راجع [`models.md`](models.md) للتفاصيل الكاملة.
 
-لا يوجد حقل على `User` يشير للبيئة. بدلًا من ذلك **`Group.supervisor`**
+لا يوجد حقل على `User` يشير للفصل. بدلًا من ذلك **`Group.supervisor`**
 (`participants/models.py`) حقل `ManyToManyField` من `Group` إلى `User` بدون
-`related_name`، فيمكن لبيئة واحدة أن يكون لها أكثر من مشرف، ويمكن نظريًا
-لمشرف أن يظهر في أكثر من بيئة. العلاقة العكسية من `User` لا تزال الاسم
+`related_name`، فيمكن لفصل واحد أن يكون له أكثر من مشرفة، ويمكن نظريًا
+لمشرفة أن تظهر في أكثر من فصل. العلاقة العكسية من `User` لا تزال الاسم
 الافتراضي `group_set` (نفس الاسم الذي كانت تنتجه `ForeignKey` غير المسمّاة).
-كل الـ Views التي تحتاج بيئة مشرف البيئة تستخدم
+كل الـ Views التي تحتاج فصل مشرفة الفصل تستخدم
 `self.request.user.group_set.first()` (انظر مثلًا طريقة
-`SupervisorDashboardView.get_group`) — وهذا يُرجع الآن **أول بيئة فقط** من
-عدة بيئات محتملة، لا بالضرورة البيئة الوحيدة.
+`SupervisorDashboardView.get_group`) — وهذا يُرجع الآن **أول فصل فقط** من
+عدة فصول محتملة، لا بالضرورة الفصل الوحيد.
 
 `Group.supervisor` عليه `limit_choices_to={"role": Role.GROUP_SUPERVISOR}` —
 لكن هذا قيد على واجهة الأدمن فقط، لا يُفرض على مستوى قاعدة البيانات. أدمن
@@ -127,7 +127,7 @@ View يحسب الفرق (`new_points - old_points`) ويطبّقه مرة وا�
 | `docker/entrypoint.sh` | ينتظر جاهزية PostgreSQL، يُشغّل `migrate` ثم `collectstatic`، ثم يُشغّل Gunicorn (3 عمّال، مهلة 120 ثانية). |
 | `docker/nginx/nginx.conf` | إعداد HTTP فقط (Bootstrap) — يُستخدم أول مرة قبل صدور أي شهادة، لتقديم تحدي ACME عبر HTTP-01. |
 | `docker/nginx/nginx-ssl.conf` | إعداد HTTPS الكامل — يُفعَّل يدويًا بعد صدور أول شهادة (استبدال `nginx.conf` به). |
-| `docker/certbot-init.sh` | سكربت تشغيل يدوي لمرة واحدة لإصدار أول شهادة Let's Encrypt (النطاق `rahhal.saqeel.org.sa`)، قبل التحوّل لإعداد HTTPS. |
+| `docker/certbot-init.sh` | سكربت تشغيل يدوي لمرة واحدة لإصدار أول شهادة Let's Encrypt، قبل التحوّل لإعداد HTTPS — **لا يزال يحمل النطاق القديم `rahhal.saqeel.org.sa` ولم يُحدَّث بعد**. النطاق الفعلي المستخدَم في الإنتاج حاليًا هو `jumaan.org`، مضبوط في `docker/nginx/nginx.conf` — النشر الحالي يعتمد على nginx proxy manager خارجي على السيرفر (منفذ 8088) لا على هذا السكربت مباشرة. |
 | `.env.docker.example` | قالب متغيرات بيئة الإنتاج — `DEBUG=False`, `ALLOWED_HOSTS`, `CSRF_TRUSTED_ORIGINS`, `USE_POSTGRES=True` ومعطيات Postgres. |
 
 نقاط تقنية مهمة:

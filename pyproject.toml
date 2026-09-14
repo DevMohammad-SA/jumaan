@@ -1,7 +1,7 @@
 [project]
-name = "ufuq"
+name = "jumaan"
 version = "1.1.0"
-description = "Youth development tracking platform for Horizon Program"
+description = "Management platform for Juman Girls' Forum"
 readme = "README.md"
 authors = [{ name = "Mohammad Albuainain", email = "dev.mohammad@tuta.io" }]
 requires-python = ">=3.12"

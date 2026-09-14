@@ -43,7 +43,7 @@ from .models import (
     WeeklyTask,
 )
 
-# Official weekly points table values for the Horizon program.
+# Official weekly points table values for Juman.
 CIRCLE_DAY_POINTS = 3
 MEETING_FULL_POINTS = 8
 MEETING_EARLY_BONUS_POINTS = 2

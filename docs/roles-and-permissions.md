@@ -82,7 +82,7 @@
 |------|------------------|-------|
 | `ParticipantLoginView` | `login_participant` | عام (لا قيد) |
 | `SupervisorLoginView` | `login_supervisor` | عام (لا قيد) |
-| `RahhalLogoutView` | `logout` | `LogoutView` القياسي |
+| `AppLogoutView` | `logout` | `LogoutView` القياسي |
 | `SetPasswordView` | `set_password` | `LoginRequiredMixin` فقط؛ `dispatch()` يعيد التوجيه للوحة إن كان `must_set_password=False` |
 | `SupervisorPasswordChangeView` | `change_password` | `LoginRequiredMixin` فقط (لا `test_func`) — أي مستخدم مسجّل يمكنه فتحها |
 | `ForgotPasswordView` | `forgot_password` | عام (لا قيد) |

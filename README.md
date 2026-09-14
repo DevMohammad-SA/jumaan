@@ -3,8 +3,10 @@
 Read this in Arabic: [README.ar.md](README.ar.md)
 
 Management platform for **Juman Girls' Forum** (ملتقى جُمان للفتيات), an
-educational forum affiliated with the association, for middle‑ and
-high‑school female students. Supervisors record daily and weekly attendance
+educational forum run by **Aisha bint Abi Bakr School for Quran
+Memorization** (مدرسة عائشة بنت أبي بكر لتحفيظ القرآن), affiliated with the
+**Jubail Charitable Society for Quran Memorization** (الجمعية الخيرية لتحفيظ
+القرآن بالجبيل), for middle‑ and high‑school female students. Supervisors record daily and weekly attendance
 (including a Quran circle) and a weekly task; participants earn a
 triple‑currency reward and progress toward an "elite trip" nomination
 (رحلة النخبة). The end‑user product is branded **جُمان** ("Juman").
@@ -206,7 +208,8 @@ those notes. See [`CHANGELOG.md`](CHANGELOG.md) for the release history.
 
 ## License / ownership
 
-Developed by **Mohammad Albuainain** for the association running **Juman
-Girls' Forum** (ملتقى جُمان للفتيات). No open‑source license file is present
-in the repository; all rights are held by the association unless stated
-otherwise.
+Developed by **Mohammad Albuainain** for **Aisha bint Abi Bakr School for
+Quran Memorization** (مدرسة عائشة بنت أبي بكر لتحفيظ القرآن), affiliated with
+the **Jubail Charitable Society for Quran Memorization** (الجمعية الخيرية
+لتحفيظ القرآن بالجبيل). No open‑source license file is present in the
+repository; all rights are held by the association unless stated otherwise.

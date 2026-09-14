@@ -65,8 +65,8 @@ class AcademicStage(models.TextChoices):
 
 class Group(models.Model):
     """
-    Represents one of the 3 "بيئات" (environments) in the Horizon program.
-    Each environment has ~35 participants and one Group Supervisor.
+    Represents one of the "فصول" (classes) in Juman. Each class has ~35
+    participants and one or more group supervisors.
     """
 
     class Meta:
