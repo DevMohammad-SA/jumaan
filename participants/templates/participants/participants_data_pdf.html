@@ -26,12 +26,15 @@
 
   @page {
     size: A4;
-    /* Top/bottom margins keep the table clear of the printed letterhead's
-       header/footer zones in letterhead.png. Verified against real
-       rendered PDFs (single- and multi-page, including natural page
-       breaks) — 6cm clears the logo/org-name block with a safety margin,
-       3cm clears the address bar at the bottom. Re-verify visually with a
-       real render if letterhead.png is ever replaced. */
+    /* letterhead.png is currently a placeholder (Juman logo only, no
+       official contact/license block) pending a real letterhead from the
+       association — it replaced Rahhal's old sponsor (Saqeel) letterhead,
+       which showed a different association's real license number and
+       could not be kept. Top/bottom margins keep the table clear of its
+       header/footer zones. Verified against real rendered PDFs (single-
+       and multi-page, including natural page breaks) — 6cm clears the
+       logo block with a safety margin, 3cm clears the bottom. Re-verify
+       visually with a real render if letterhead.png is ever replaced. */
     margin: 6cm 1.4cm 3cm 1.4cm;
     background-image: url("{% static 'images/letterhead.png' %}");
     background-repeat: no-repeat;
@@ -55,7 +58,7 @@
   body {
     font-family: "Tajawal", "Noto Naskh Arabic", "Arial", sans-serif;
     font-size: 11px;
-    color: #2B2F33;
+    color: #22303A;
     direction: rtl;
     margin: 0;
   }
@@ -68,7 +71,7 @@
   }
   .report-meta {
     font-size: 10.5px;
-    color: #5F676E;
+    color: #56696C;
     text-align: center;
     margin: 0 0 16px;
   }
@@ -84,12 +87,12 @@
     page-break-inside: avoid;
   }
   th, td {
-    border: 1px solid #E2DCD0;
+    border: 1px solid #D9EBE8;
     padding: 5px 7px;
     text-align: right;
   }
   th {
-    background: #F7F3EA;
+    background: #F4FAF9;
     font-weight: 700;
   }
   td.num {
@@ -98,22 +101,22 @@
 
   .empty-note {
     text-align: center;
-    color: #5F676E;
+    color: #56696C;
     padding: 24px 0;
   }
   .count-line {
     margin-top: 12px;
     font-size: 10.5px;
-    color: #5F676E;
+    color: #56696C;
     text-align: left;
   }
 </style>
 </head>
 <body>
-  <div class="report-title">تقرير بيانات المشاركين — رحّال</div>
+  <div class="report-title">تقرير بيانات المشاركات — ملتقى جُمان للفتيات</div>
   <div class="report-meta">
     تاريخ الإصدار: {{ generated_at|date:"Y-m-d H:i" }}
-    {% if generated_by.full_name %} — أصدره: {{ generated_by.full_name }}{% endif %}
+    {% if generated_by.full_name %} — أصدرته: {{ generated_by.full_name }}{% endif %}
   </div>
 
   {% if participants %}
@@ -122,7 +125,7 @@
         <tr>
           <th>#</th>
           <th>الاسم الكامل</th>
-          <th>البيئة</th>
+          <th>الفصل</th>
           <th>المرحلة الدراسية</th>
           <th>الأميال</th>
           <th>النقاط</th>
@@ -143,9 +146,9 @@
         {% endfor %}
       </tbody>
     </table>
-    <div class="count-line">إجمالي المشاركين في التقرير: {{ participants|length }}</div>
+    <div class="count-line">إجمالي المشاركات في التقرير: {{ participants|length }}</div>
   {% else %}
-    <p class="empty-note">لا يوجد مشاركون مطابقون للتصفية المختارة.</p>
+    <p class="empty-note">لا توجد مشاركات مطابقات للتصفية المختارة.</p>
   {% endif %}
 </body>
 </html>

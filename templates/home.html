@@ -4,27 +4,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>رحّال</title>
+<title>ملتقى جُمان للفتيات</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --asphalt:#2B2F33;
-  --gold:#C79A3B;
+  --asphalt:#22303A;
+  --gold:#40A595;
   --white:#FFFFFF;
-  --sand:#F7F3EA;
-  --line:#E2DCD0;
-  --slate:#5F676E;
-  --gold-ink:#8A6520;
-  --gold-soft:#F0E2C2;
+  --sand:#F4FAF9;
+  --line:#D9EBE8;
+  --slate:#56696C;
+  --gold-ink:#8E76B5;
+  --gold-soft:#ECE7F5;
+  --badge:#8BD2CE;
+  --pending-bg:#FAE572;
+  --pending-ink:#7A6510;
 
   --r-sm:8px; --r-md:14px; --r-lg:22px;
   --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
-  --shadow:0 1px 2px rgba(43,47,51,.06),0 12px 32px -18px rgba(43,47,51,.35);
+  --shadow:0 1px 2px rgba(34,48,58,.06),0 12px 32px -18px rgba(34,48,58,.35);
 
-  --font-display:"Tajawal","Cairo","Segoe UI",sans-serif;
-  --font-ui:"IBM Plex Sans Arabic","Tajawal",sans-serif;
+  /* TODO: تأكيد اسم الخط الأصلي من ملف الشعار عالي الجودة — Tajawal
+     بديل مؤقت معتمد لحين توفر هذا التأكيد. */
+  --font-display:"Tajawal",sans-serif;
+  --font-ui:"Tajawal",sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -69,8 +74,8 @@ body{
   transition:.18s;
   min-height:44px;
 }
-.btn-gold{background:var(--gold); color:#241F14}
-.btn-gold:hover{background:#B98B2E}
+.btn-gold{background:var(--gold); color:#0D211D}
+.btn-gold:hover{background:#35897B}
 .btn-ghost{background:transparent; color:var(--asphalt); border-color:var(--asphalt)}
 .btn-ghost:hover{background:var(--asphalt); color:#fff}
 .btn:focus-visible{outline:3px solid var(--gold); outline-offset:2px}
@@ -97,7 +102,7 @@ body{
      .20 peak opacity, same top inline-start origin; the ending-shape and
      final stop are retuned so the fade to full transparency stays inside
      roughly the same corner region now that the box no longer bounds it. */
-  background:radial-gradient(46% 90% at 0% 0%,rgba(199,154,59,.20),transparent 70%);
+  background:radial-gradient(46% 90% at 0% 0%,rgba(64,165,149,.20),transparent 70%);
   pointer-events:none;
 }
 .hero .in{position:relative; max-width:640px}
@@ -201,43 +206,41 @@ body{
 <div class="wrap">
   <header class="site-header">
     <div class="brand">
-      <img src="{% static 'images/logo.png' %}" alt="رحّال" style="height:32px; width:auto;">
+      <img src="{% static 'images/logo.png' %}" alt="ملتقى جُمان للفتيات" style="height:32px; width:auto;">
       <div>
-        <div class="wordmark">رحّال</div>
-        <div class="tag">تعلم &middot; أنجز &middot; انطلق</div>
+        <div class="wordmark">جُمان</div>
+        <div class="tag">وبك العهد يُزان</div>
       </div>
     </div>
-    <a href="{% url 'accounts:login_supervisor' %}" class="btn btn-ghost">دخول المشرفين</a>
+    <a href="{% url 'accounts:login_supervisor' %}" class="btn btn-ghost">دخول المشرفات</a>
   </header>
 
   <section class="hero">
     <div class="in">
-      <span class="chip">جمعية صقيل لتنمية الشباب</span>
-      <h1>١٤ أسبوعًا، وطريق واحد نحو التميز</h1>
-      <p>أنشطة أسبوعية ومهمة تطبيقية. كل إنجاز يتحوّل أميالًا تقربك من رحلة النخبة.</p>
+      <span class="chip">ملتقى تعليمي تابع للجمعية</span>
+      <h1>مسيرة تتعلمين فيها من سيرة الصحابيات وسيرة النبي ﷺ</h1>
+      <p>أنشطة أسبوعية ومهمة تطبيقية. كل إنجاز يتحوّل أميالًا تقربكِ من رحلة النخبة.</p>
       <div class="cta">
-        <a href="{% url 'accounts:login_participant' %}" class="btn btn-gold">دخول المشارك</a>
+        <a href="{% url 'accounts:login_participant' %}" class="btn btn-gold">دخول المشاركة</a>
       </div>
     </div>
   </section>
 
-  <div class="stat-strip">
-    <div class="card"><b>14</b><span>أسبوعًا</span></div>
-    <div class="card"><b>3</b><span>بيئات</span></div>
-    <div class="card"><b>{{ participants_count }}</b><span>مشاركًا</span></div>
+  <div class="stat-strip" style="grid-template-columns:1fr">
+    <div class="card"><b>{{ participants_count }}</b><span>مشاركةً</span></div>
   </div>
 
   <section class="about">
     <div>
-      <h2>عن رحّال</h2>
-      <p>برنامج قيمي مهاري تابع لجمعية صقيل لتنمية الشباب، يجمع بين القيمة والمهارة والتجربة العملية عبر لقاءات أسبوعية منظمة لثلاث بيئات من الناشئة والشباب.</p>
+      <h2>عن ملتقى جُمان</h2>
+      <p>ملتقى جُمان للفتيات برنامج تعليمي تابع للجمعية، موجّه لطالبات المرحلة المتوسطة والثانوية، يتمحور حول سيرة الصحابيات والسيرة النبوية ﷺ، ويجمع بين المتابعة اليومية والأنشطة الأسبوعية والمهام التطبيقية.</p>
     </div>
     <div>
       <h2>مكونات المسار</h2>
       <ul>
         <li>متابعة يومية للالتزام والانضباط طوال الأسبوع.</li>
-        <li>لقاء جماعي أسبوعي يجمع البيئة كاملة.</li>
-        <li>مهمة تطبيقية أسبوعية تُقيَّم من المشرف.</li>
+        <li>لقاء جماعي أسبوعي يجمع الفصل كاملاً.</li>
+        <li>مهمة تطبيقية أسبوعية تُقيَّم من المشرفة.</li>
         <li>نظام أميال ونقاط شرائية يُصرف في متجر البرنامج.</li>
       </ul>
     </div>
@@ -245,7 +248,7 @@ body{
 </div>
 
 <footer class="site-footer">
-  رحّال — من تنفيذ جمعية صقيل لتنمية الشباب
+  ملتقى جُمان للفتيات — وبك العهد يُزان
 </footer>
 
 <footer class="dev-credit">

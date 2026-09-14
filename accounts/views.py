@@ -37,7 +37,7 @@ class SupervisorLoginView(LoginView):
         return reverse("home")
 
 
-class RahhalLogoutView(LogoutView):
+class AppLogoutView(LogoutView):
     next_page = "home"
 
 
@@ -118,6 +118,6 @@ class ForgotPasswordView(FormView):
         # registered in the system to an anonymous visitor.
         messages.success(
             self.request,
-            "تم إرسال طلبك. سيتواصل معك المشرف بعد المراجعة.",
+            "تم إرسال طلبكِ. ستتواصل معكِ المشرفة بعد المراجعة.",
         )
         return super().form_valid(form)

@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}أرشيف المهام — رحّال{% endblock %}
+{% block title %}أرشيف المهام — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 .archive-layout{display:grid; grid-template-columns:280px 1fr; gap:var(--s3); align-items:start}
@@ -28,9 +28,9 @@ table.roster th{color:var(--slate); font-weight:600; font-size:12px}
 table.roster tr:last-child td{border-bottom:none}
 
 .status-pill{display:inline-block; border-radius:99px; padding:4px 12px; font-size:12px; font-weight:700}
-.status-pending{background:var(--gold-soft); color:var(--gold-ink)}
-.status-accepted{background:#E4EFE5; color:var(--done)}
-.status-rejected{background:#FBEEEA; color:var(--alert)}
+.status-pending{background:var(--pending-bg); color:var(--pending-ink)}
+.status-accepted{background:#E3F2E2; color:var(--done)}
+.status-rejected{background:#FDEEE6; color:var(--alert)}
 .rejection-note{font-family:var(--font-ui); font-size:12px; color:var(--slate); margin:4px 0 0}
 .featured-badge{
   display:inline-block;
@@ -147,7 +147,7 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
 
 /* معاينة الملف داخل نافذة منبثقة */
 .modal-overlay{
-  position:fixed; inset:0; background:rgba(43,47,51,.7);
+  position:fixed; inset:0; background:rgba(34,48,58,.7);
   display:flex; align-items:center; justify-content:center;
   z-index:100; padding:var(--s3);
 }
@@ -162,7 +162,7 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
   background:var(--asphalt); color:#fff; border:none; border-radius:50%;
   width:32px; height:32px; cursor:pointer;
 }
-.modal-close:hover{background:#1f2225}
+.modal-close:hover{background:#182228}
 #modal-content{margin-top:28px}
 #modal-content img,
 #modal-content video{max-width:80vw; max-height:75vh; display:block}
@@ -173,7 +173,7 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
 
 {% block content %}
   <h1 class="page-title">أرشيف المهام</h1>
-  <p class="page-sub">استعرض كل المهام الأسبوعية السابقة، ومن سلّم ومن لم يسلّم لكل مهمة، وأعد إتاحة التسليم لمشارك عند الحاجة.</p>
+  <p class="page-sub">استعرضي كل المهام الأسبوعية السابقة، ومن سلّمت ومن لم تسلّم لكل مهمة، وأعيدي إتاحة التسليم لمشاركة عند الحاجة.</p>
 
   <div class="archive-layout">
     <nav class="task-list">
@@ -190,7 +190,7 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
     <div>
       {% if not selected_task %}
         <section class="card">
-          <p class="empty-note">اختر مهمة من القائمة لعرض تفاصيلها وتسليماتها.</p>
+          <p class="empty-note">اختاري مهمة من القائمة لعرض تفاصيلها وتسليماتها.</p>
         </section>
       {% else %}
         <section class="card">
@@ -221,14 +221,14 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
         {% endif %}
 
         <section class="card">
-          <h2 class="subtable-title" style="margin-top:0">من سلّم ({{ submitted|length }})</h2>
+          <h2 class="subtable-title" style="margin-top:0">من سلّمت ({{ submitted|length }})</h2>
           {% if submitted %}
             <div class="table-scroll">
               <table class="roster" id="submitted-table">
                 <thead>
                   <tr>
-                    <th class="sortable" data-sort="text" data-col="0">المشارك<span class="sort-arrow"></span></th>
-                    <th class="sortable" data-sort="text" data-col="1">البيئة<span class="sort-arrow"></span></th>
+                    <th class="sortable" data-sort="text" data-col="0">المشاركة<span class="sort-arrow"></span></th>
+                    <th class="sortable" data-sort="text" data-col="1">الفصل<span class="sort-arrow"></span></th>
                     <th>رقم الهوية</th>
                     <th>الملف</th>
                     <th>الحالة</th>
@@ -271,7 +271,7 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
                       </td>
                       <td class="reopen-cell">
                         {% if submission.reopened_for_resubmission %}
-                          <span class="reopen-done">تم إتاحة التسليم مجددًا، بانتظار رفع الطالب</span>
+                          <span class="reopen-done">تم إتاحة التسليم مجددًا، بانتظار رفع الطالبة</span>
                         {% else %}
                           <form class="reopen-form" method="post">
                             {% csrf_token %}
@@ -288,19 +288,19 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
               </table>
             </div>
           {% else %}
-            <p class="empty-note">لم يسلّم أي مشارك لهذه المهمة بعد.</p>
+            <p class="empty-note">لم تسلّم أي مشاركة لهذه المهمة بعد.</p>
           {% endif %}
         </section>
 
         <section class="card">
-          <h2 class="subtable-title" style="margin-top:0">من لم يسلّم ({{ not_submitted|length }})</h2>
+          <h2 class="subtable-title" style="margin-top:0">من لم تسلّم ({{ not_submitted|length }})</h2>
           {% if not_submitted %}
             <div class="table-scroll">
               <table class="roster" id="not-submitted-table">
                 <thead>
                   <tr>
-                    <th class="sortable" data-sort="text" data-col="0">المشارك<span class="sort-arrow"></span></th>
-                    <th class="sortable" data-sort="text" data-col="1">البيئة<span class="sort-arrow"></span></th>
+                    <th class="sortable" data-sort="text" data-col="0">المشاركة<span class="sort-arrow"></span></th>
+                    <th class="sortable" data-sort="text" data-col="1">الفصل<span class="sort-arrow"></span></th>
                     <th>رقم الهوية</th>
                   </tr>
                 </thead>
@@ -316,7 +316,7 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
               </table>
             </div>
           {% else %}
-            <p class="empty-note">جميع المشاركين سلّموا لهذه المهمة.</p>
+            <p class="empty-note">جميع المشاركات سلّمن لهذه المهمة.</p>
           {% endif %}
         </section>
       {% endif %}

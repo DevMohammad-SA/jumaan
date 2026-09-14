@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}سجل النقاط — رحّال{% endblock %}
+{% block title %}سجل النقاط — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 .table-scroll{overflow-x:auto}
@@ -108,13 +108,13 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
   <p class="page-sub">
     كل عملية منح أو خصم نقاط مرت عبر النظام، بما فيها الحضور والمهام والنقاط الإضافية.
     لا تشمل عمليات الشراء والاسترجاع من المتجر.
-    اضغط على عنوان أي عمود للفرز حسبه، أو ابحث بالاسم، أو صفِّ حسب المصدر.
+    اضغطي على عنوان أي عمود للفرز حسبه، أو ابحثي بالاسم، أو صفِّي حسب المصدر.
     (عرض حتى 200 عملية أحدث، دون تصفح للصفحات حاليًا).
   </p>
 
   <section class="card">
     {% if entries %}
-      <input type="text" id="ledger-search" class="roster-search" placeholder="ابحث باسم المشارك أو المشرف…" autocomplete="off">
+      <input type="text" id="ledger-search" class="roster-search" placeholder="ابحثي باسم المشاركة أو المشرفة…" autocomplete="off">
 
       <div class="source-filter-bar">
         <div class="source-filter-actions">
@@ -150,8 +150,8 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
           <thead>
             <tr>
               <th class="sortable" data-sort="text" data-col="0">التاريخ<span class="sort-arrow"></span></th>
-              {% if show_participant_column %}<th class="sortable" data-sort="text" data-col="1">المشارك<span class="sort-arrow"></span></th>{% endif %}
-              <th>البيئة</th>
+              {% if show_participant_column %}<th class="sortable" data-sort="text" data-col="1">المشاركة<span class="sort-arrow"></span></th>{% endif %}
+              <th>الفصل</th>
               <th class="sortable" data-sort="number" data-col="{% if show_participant_column %}3{% else %}2{% endif %}">التغيير<span class="sort-arrow"></span></th>
               <th class="sortable" data-sort="text" data-col="{% if show_participant_column %}4{% else %}3{% endif %}">المصدر<span class="sort-arrow"></span></th>
               <th>الوصف</th>

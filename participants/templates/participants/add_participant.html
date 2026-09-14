@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}إضافة طالب — رحّال{% endblock %}
+{% block title %}إضافة طالبة — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 .field{margin-bottom:var(--s2)}
@@ -69,7 +69,7 @@
   margin-top:var(--s2);
   text-decoration:none;
 }
-.btn:hover{background:#1f2225}
+.btn:hover{background:#182228}
 .btn-block{width:100%}
 
 .page-message{
@@ -79,14 +79,14 @@
   padding:12px 14px;
   margin-bottom:var(--s2);
 }
-.page-message--success{background:#E4EFE5; color:var(--done); border:1px solid var(--done)}
-.page-message--error{background:#FBEEEA; color:var(--alert); border:1px solid var(--alert)}
+.page-message--success{background:#E3F2E2; color:var(--done); border:1px solid var(--done)}
+.page-message--error{background:#FDEEE6; color:var(--alert); border:1px solid var(--alert)}
 {% endblock %}
 
 {% block content %}
-  <h1 class="page-title">إضافة طالب جديد</h1>
+  <h1 class="page-title">إضافة طالبة جديدة</h1>
   <p class="page-sub">
-    إضافة مشارك واحد ببياناته الأساسية. كلمة المرور الأولية هي رقم الهوية، وسيُطلب من الطالب تغييرها عند أول تسجيل دخول.
+    إضافة مشاركة واحدة ببياناتها الأساسية. كلمة المرور الأولية هي رقم الهوية، وسيُطلب من الطالبة تغييرها عند أول تسجيل دخول.
   </p>
 
   {% if messages %}
@@ -115,7 +115,7 @@
         <label for="id_group">{{ form.group.label }}</label>
         {{ form.group }}
         {% if form.fields.group.disabled %}
-          <div class="hint">أنت مقيّد ببيئتك الحالية، لا يمكنك اختيار بيئة أخرى.</div>
+          <div class="hint">أنتِ مقيّدة بفصلكِ الحالي، لا يمكنكِ اختيار فصل آخر.</div>
         {% endif %}
         {% if form.group.errors %}<div class="errors">{{ form.group.errors|join:"، " }}</div>{% endif %}
       </div>
@@ -138,7 +138,7 @@
         {% if form.guardian_phone.errors %}<div class="errors">{{ form.guardian_phone.errors|join:"، " }}</div>{% endif %}
       </div>
 
-      <button type="submit" class="btn btn-block">إضافة الطالب</button>
+      <button type="submit" class="btn btn-block">إضافة الطالبة</button>
     </form>
   </section>
 {% endblock %}

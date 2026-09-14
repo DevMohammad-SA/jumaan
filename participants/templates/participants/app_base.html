@@ -4,29 +4,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}رحّال{% endblock %}</title>
+<title>{% block title %}ملتقى جُمان للفتيات{% endblock %}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --asphalt:#2B2F33;
-  --gold:#C79A3B;
+  --asphalt:#22303A;
+  --gold:#40A595;
   --white:#FFFFFF;
-  --sand:#F7F3EA;
-  --line:#E2DCD0;
-  --slate:#5F676E;
-  --gold-ink:#8A6520;
-  --gold-soft:#F0E2C2;
-  --done:#4E7A55;
-  --alert:#B4553B;
+  --sand:#F4FAF9;
+  --line:#D9EBE8;
+  --slate:#56696C;
+  --gold-ink:#8E76B5;
+  --gold-soft:#ECE7F5;
+  --done:#3F8A3D;
+  --alert:#F36F26;
+  --badge:#8BD2CE;
+  --pending-bg:#FAE572;
+  --pending-ink:#7A6510;
 
   --r-sm:8px; --r-md:14px; --r-lg:22px;
   --s1:8px; --s2:16px; --s3:24px; --s4:40px;
-  --shadow:0 1px 2px rgba(43,47,51,.06),0 12px 32px -18px rgba(43,47,51,.35);
+  --shadow:0 1px 2px rgba(34,48,58,.06),0 12px 32px -18px rgba(34,48,58,.35);
 
-  --font-display:"Tajawal","Cairo","Segoe UI",sans-serif;
-  --font-ui:"IBM Plex Sans Arabic","Tajawal",sans-serif;
+  /* TODO: تأكيد اسم الخط الأصلي من ملف الشعار عالي الجودة — Tajawal
+     بديل مؤقت معتمد لحين توفر هذا التأكيد. */
+  --font-display:"Tajawal",sans-serif;
+  --font-ui:"Tajawal",sans-serif;
 }
 *{box-sizing:border-box}
 body{
@@ -94,8 +99,8 @@ body{
   height:16px;
   padding:0 4px;
   border-radius:999px;
-  background:var(--alert);
-  color:#fff;
+  background:var(--badge);
+  color:var(--asphalt);
   font-size:10px;
   font-weight:700;
   line-height:1;
@@ -238,7 +243,7 @@ body{
 .mobile-more-overlay{
   position:fixed;
   inset:0;
-  background:rgba(43,47,51,.5);
+  background:rgba(34,48,58,.5);
   z-index:60;
   display:flex;
   align-items:flex-end;
@@ -339,8 +344,8 @@ body{
 <nav class="app-nav app-nav--top">
   <div class="app-nav__inner">
     <div class="app-nav__brand">
-      <img src="{% static 'images/logo.png' %}" alt="رحّال">
-      <span class="wordmark">رحّال</span>
+      <img src="{% static 'images/logo.png' %}" alt="ملتقى جُمان للفتيات">
+      <span class="wordmark">جُمان</span>
     </div>
     <div class="app-nav__links">
       {% for item in navbar_items|slice:":1" %}
@@ -414,12 +419,12 @@ body{
         <div class="app-nav__dropdown">
           <button type="button" class="app-nav__link app-nav__dropdown-toggle" id="navStudentsBtn"
                   aria-haspopup="true" aria-expanded="false" aria-controls="navStudentsMenu">
-            <span class="app-nav__label">الطلاب</span>
+            <span class="app-nav__label">الطالبات</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="app-nav__dropdown-menu" id="navStudentsMenu" hidden>
             {% for item in navbar_items %}
-              {% if item.label == "الاستيراد" or item.label == "بيانات المشاركين" or item.label == "الحلقة القرآنية" or item.label == "فعالية الأسبوع" or item.label == "إضافة طالب" %}
+              {% if item.label == "الاستيراد" or item.label == "بيانات المشاركات" or item.label == "الحلقة القرآنية" or item.label == "فعالية الأسبوع" or item.label == "إضافة طالبة" %}
                 <a href="{{ item.url }}" class="app-nav__dropdown-item{% if item.active %} is-active{% endif %}">
                   <span class="app-nav__icon">{{ item.icon|safe }}</span><span>{{ item.label }}</span>
                   {% if item.badge_count > 0 %}<span class="app-nav__badge">{{ item.badge_count }}</span>{% endif %}

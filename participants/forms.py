@@ -17,7 +17,7 @@ class CircleAttendanceForm(forms.ModelForm):
     participant = forms.ModelChoiceField(
         queryset=Participant.objects.all(),
         empty_label=None,
-        label="المشارك",
+        label="المشاركة",
     )
 
     class Meta:
@@ -116,7 +116,7 @@ class TaskSubmissionForm(forms.ModelForm):
             raise forms.ValidationError("يجب تقديم ملف أو نص، حسب الصيغة المطلوبة لهذه المهمة")
 
         if file and text_content:
-            raise forms.ValidationError("قدّم ملفًا أو نصًا فقط، وليس كليهما معًا")
+            raise forms.ValidationError("قدّمي ملفًا أو نصًا فقط، وليس كليهما معًا")
 
         if self.task:
             allowed = self.task.get_allowed_formats_list()
@@ -165,7 +165,7 @@ class TaskSubmissionForm(forms.ModelForm):
 
 
 class ExtraPointsForm(forms.Form):
-    participant = forms.ModelChoiceField(queryset=Participant.objects.none(), label="المشارك")
+    participant = forms.ModelChoiceField(queryset=Participant.objects.none(), label="المشاركة")
     points = forms.IntegerField(label="عدد النقاط", min_value=-1000, max_value=1000)
     reason = forms.CharField(label="السبب", widget=forms.Textarea(attrs={"rows": 2}))
 
@@ -181,7 +181,7 @@ class ExtraPointsForm(forms.Form):
     def clean_participant(self):
         participant = self.cleaned_data["participant"]
         if not self.fields["participant"].queryset.filter(id=participant.id).exists():
-            raise forms.ValidationError("لا يمكنك منح نقاط لهذا المشارك")
+            raise forms.ValidationError("لا يمكنكِ منح نقاط لهذه المشاركة")
         return participant
 
 
@@ -198,12 +198,12 @@ class SingleParticipantForm(forms.Form):
     full_name = forms.CharField(label="الاسم الكامل", max_length=100)
     national_id = forms.CharField(label="رقم الهوية / الإقامة", max_length=10)
     group = forms.ModelChoiceField(
-        queryset=Group.objects.none(), label="البيئة", required=False
+        queryset=Group.objects.none(), label="الفصل", required=False
     )
     academic_stage = forms.ChoiceField(
         label="المرحلة الدراسية", choices=AcademicStage.choices
     )
-    phone = forms.CharField(label="رقم جوال المشارك", max_length=20, required=False)
+    phone = forms.CharField(label="رقم جوال المشاركة", max_length=20, required=False)
     guardian_phone = forms.CharField(
         label="رقم جوال ولي الأمر", max_length=20, required=False
     )

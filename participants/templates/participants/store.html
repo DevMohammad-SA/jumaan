@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}المتجر — رحّال{% endblock %}
+{% block title %}المتجر — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 .balance-bar{
@@ -55,7 +55,7 @@
   font-family:var(--font-display); font-weight:700; font-size:14px;
   padding:10px 14px; border-radius:99px;
 }
-.btn-order:hover{background:#1f2225}
+.btn-order:hover{background:#182228}
 .btn-order:disabled{background:var(--line); color:var(--slate); cursor:not-allowed}
 .order-hint{
   font-family:var(--font-ui); font-size:11px; color:var(--alert);
@@ -69,9 +69,9 @@ table.roster th{color:var(--slate); font-weight:600; font-size:12px}
 table.roster tr:last-child td{border-bottom:none}
 
 .status-pill{display:inline-block; border-radius:99px; padding:4px 12px; font-size:12px; font-weight:700}
-.status-pending{background:var(--gold-soft); color:var(--gold-ink)}
-.status-completed{background:#E4EFE5; color:var(--done)}
-.status-refunded{background:#FBEEEA; color:var(--alert)}
+.status-pending{background:var(--pending-bg); color:var(--pending-ink)}
+.status-completed{background:#E3F2E2; color:var(--done)}
+.status-refunded{background:#FDEEE6; color:var(--alert)}
 
 .store-message{
   border-radius:var(--r-sm);
@@ -82,12 +82,12 @@ table.roster tr:last-child td{border-bottom:none}
   margin-bottom:var(--s2);
 }
 .store-message--success{
-  background:#E4EFE5;
+  background:#E3F2E2;
   color:var(--done);
   border:1px solid var(--done);
 }
 .store-message--error{
-  background:#FBEEEA;
+  background:#FDEEE6;
   color:var(--alert);
   border:1px solid var(--alert);
 }
@@ -106,7 +106,7 @@ table.roster tr:last-child td{border-bottom:none}
   {% endif %}
 
   <div class="balance-bar">
-    رصيدك من النقاط الشرائية: <b>{{ participant.purchase_points }}</b> 💰
+    رصيدكِ من النقاط الشرائية: <b>{{ participant.purchase_points }}</b> 💰
   </div>
 
   <div class="tabs">
@@ -141,7 +141,7 @@ table.roster tr:last-child td{border-bottom:none}
                 </button>
               </form>
               {% if participant.purchase_points < product.price %}
-                <div class="order-hint">رصيدك ما يكفي لطلب هذا المنتج 💰</div>
+                <div class="order-hint">رصيدكِ ما يكفي لطلب هذا المنتج 💰</div>
               {% endif %}
             </div>
           </div>
@@ -189,7 +189,7 @@ table.roster tr:last-child td{border-bottom:none}
           </table>
         </div>
       {% else %}
-        <p class="empty-note">ما طلبت أي منتج بعد 🛍️</p>
+        <p class="empty-note">ما طلبتِ أي منتج بعد 🛍️</p>
       {% endif %}
     </section>
   </section>

@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}بيانات المشاركين — رحّال{% endblock %}
+{% block title %}بيانات المشاركات — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 .wrap{max-width:1120px}
@@ -126,26 +126,26 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
 {% endblock %}
 
 {% block content %}
-  <h1 class="page-title">بيانات المشاركين</h1>
+  <h1 class="page-title">بيانات المشاركات</h1>
   <p class="page-sub">
     {% if is_scoped_to_group %}
-      بيانات مشاركي بيئتك. اضغط على عنوان أي عمود للفرز حسبه، أو ابحث بالاسم أو رقم الهوية.
+      بيانات مشاركات بيئتكِ. اضغطي على عنوان أي عمود للفرز حسبه، أو ابحثي بالاسم أو رقم الهوية.
     {% else %}
-      بيانات جميع المشاركين في البرنامج. اضغط على عنوان أي عمود للفرز حسبه، أو ابحث بالاسم أو رقم الهوية.
+      بيانات جميع المشاركات في البرنامج. اضغطي على عنوان أي عمود للفرز حسبه، أو ابحثي بالاسم أو رقم الهوية.
     {% endif %}
   </p>
 
   <section class="card">
     <h2>
-      {% if is_scoped_to_group %}مشاركو بيئتك{% else %}جميع المشاركين{% endif %}
+      {% if is_scoped_to_group %}مشاركات بيئتكِ{% else %}جميع المشاركات{% endif %}
     </h2>
 
     {% if not participants %}
-      <p class="empty-note">لا توجد بيانات مشاركين لعرضها حتى الآن.</p>
+      <p class="empty-note">لا توجد بيانات مشاركات لعرضها حتى الآن.</p>
     {% else %}
       <a href="#" id="export-pdf-btn" class="export-pdf-btn">تصدير PDF</a>
 
-      <input type="text" id="roster-search" class="roster-search" placeholder="ابحث بالاسم أو رقم الهوية…" autocomplete="off">
+      <input type="text" id="roster-search" class="roster-search" placeholder="ابحثي بالاسم أو رقم الهوية…" autocomplete="off">
 
       {% if group_names|length > 1 %}
         <div class="group-filter-bar">
@@ -170,14 +170,14 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
             <tr>
               <th class="sortable" data-sort="text" data-col="0">الاسم الكامل<span class="sort-arrow"></span></th>
               <th>رقم الهوية</th>
-              <th class="sortable" data-sort="text" data-col="2">البيئة<span class="sort-arrow"></span></th>
+              <th class="sortable" data-sort="text" data-col="2">الفصل<span class="sort-arrow"></span></th>
               <th class="sortable" data-sort="text" data-col="3">المرحلة الدراسية<span class="sort-arrow"></span></th>
               <th class="sortable num-col" data-sort="number" data-col="4">الأميال<span class="sort-arrow"></span></th>
               <th class="sortable num-col" data-sort="number" data-col="5">النقاط<span class="sort-arrow"></span></th>
               <th class="sortable num-col" data-sort="number" data-col="6">النقاط الشرائية<span class="sort-arrow"></span></th>
               <th class="sortable num-col" data-sort="number" data-col="7">أيام حضور الحلقة<span class="sort-arrow"></span></th>
               <th class="sortable num-col" data-sort="number" data-col="8">مرات حضور اللقاء<span class="sort-arrow"></span></th>
-              <th>رقم جوال المشارك</th>
+              <th>رقم جوال المشاركة</th>
               <th>رقم جوال ولي الأمر</th>
             </tr>
           </thead>

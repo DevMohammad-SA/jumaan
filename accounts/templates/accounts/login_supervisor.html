@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}دخول المشرفين — رحّال{% endblock %}
+{% block title %}دخول المشرفات — ملتقى جُمان للفتيات{% endblock %}
 
 {% block side_pitch %}
-<h2>تابع بيئتك،<br>وارصد إنجازات فريقك.</h2>
+<h2>تابعي بيئتكِ،<br>وارصدي إنجازات فريقكِ.</h2>
 <p>الحضور، التسميع، والمهام — كلها في مكان واحد.</p>
 {% endblock %}
 
 {% block form_content %}
-<div class="eyebrow">دخول المشرفين</div>
-<h1>مرحبًا بك مجددًا</h1>
-<p class="lead">أدخل اسم المستخدم وكلمة المرور الخاصة بحسابك.</p>
+<div class="eyebrow">دخول المشرفات</div>
+<h1>مرحبًا بكِ مجددًا</h1>
+<p class="lead">أدخلي اسم المستخدمة وكلمة المرور الخاصة بحسابكِ.</p>
 
 {% if form.errors %}
-<div class="form-error">اسم المستخدم أو كلمة المرور غير صحيحة. تأكد من البيانات وحاول مرة ثانية.</div>
+<div class="form-error">اسم المستخدمة أو كلمة المرور غير صحيحة. تأكدي من البيانات وحاولي مرة ثانية.</div>
 {% endif %}
 
 <form method="post" action="{% url 'accounts:login_supervisor' %}" novalidate>
   {% csrf_token %}
   <div class="field">
-    <label for="id_username">اسم المستخدم</label>
+    <label for="id_username">اسم المستخدمة</label>
     <input
       type="text"
       dir="ltr"
@@ -45,6 +45,6 @@
 </form>
 
 <div class="switch-portal">
-  مشارك في البرنامج؟ <a href="{% url 'accounts:login_participant' %}">ادخل من هنا</a>
+  مشاركة في البرنامج؟ <a href="{% url 'accounts:login_participant' %}">ادخلي من هنا</a>
 </div>
 {% endblock %}

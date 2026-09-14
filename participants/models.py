@@ -56,11 +56,12 @@ def compress_image_field(image_field):
 
 # Create your models here.
 class AcademicStage(models.TextChoices):
-    GRADE_5 = "grade_5", "خامس ابتدائي"
-    GRADE_6 = "grade_6", "سادس ابتدائي"
     GRADE_7 = "grade_7", "أول متوسط"
     GRADE_8 = "grade_8", "ثاني متوسط"
     GRADE_9 = "grade_9", "ثالث متوسط"
+    GRADE_10 = "grade_10", "أول ثانوي"
+    GRADE_11 = "grade_11", "ثاني ثانوي"
+    GRADE_12 = "grade_12", "ثالث ثانوي"
 
 class Group(models.Model):
     """
@@ -69,14 +70,14 @@ class Group(models.Model):
     """
 
     class Meta:
-        verbose_name = "بيئة"
-        verbose_name_plural = "البيئات"
+        verbose_name = "فصل"
+        verbose_name_plural = "الفصول"
 
-    name = models.CharField(max_length=50,unique=True,verbose_name="اسم البيئة")
+    name = models.CharField(max_length=50,unique=True,verbose_name="اسم الفصل")
     supervisor = models.ManyToManyField(settings.AUTH_USER_MODEL,
                                         blank=True,
                                         limit_choices_to={"role":Role.GROUP_SUPERVISOR},
-                                        verbose_name="المشرفون")
+                                        verbose_name="المشرفات")
 
     def __str__(self):
         return f"{self.name}"
@@ -90,7 +91,7 @@ class Participant(models.Model):
     """
 
     user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
-    group = models.ForeignKey(Group,on_delete=models.SET_NULL,null=True,related_name="participants",verbose_name="البيئة")
+    group = models.ForeignKey(Group,on_delete=models.SET_NULL,null=True,related_name="participants",verbose_name="الفصل")
     miles = models.PositiveIntegerField(default=0,verbose_name="الأميال")
     points = models.PositiveIntegerField(default=0,verbose_name="النقاط")
     purchase_points = models.PositiveIntegerField(default=0,verbose_name="النقاط الشرائية")
@@ -104,12 +105,12 @@ class Participant(models.Model):
     )
 
     class Meta:
-        verbose_name = "مشارك"
-        verbose_name_plural = "المشاركون"
+        verbose_name = "مشاركة"
+        verbose_name_plural = "المشاركات"
         ordering = ["user__full_name"]
 
     def __str__(self):
-        group_name = self.group.name if self.group else "بدون بيئة"
+        group_name = self.group.name if self.group else "بدون فصل"
         return f"{self.user.full_name} - {group_name}"
 
 
@@ -131,7 +132,7 @@ class CircleAttendance(models.Model):
         Participant,
         on_delete=models.CASCADE,
         related_name="circle_attendances",
-        verbose_name="المشارك",
+        verbose_name="المشاركة",
     )
     date = models.DateField(verbose_name="التاريخ")
     attended = models.BooleanField(default=False, verbose_name="حضر؟")
@@ -141,7 +142,7 @@ class CircleAttendance(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         limit_choices_to={"role": Role.GROUP_SUPERVISOR},
-        verbose_name="سجّله",
+        verbose_name="سجّلته",
     )
 
     class Meta:
@@ -169,7 +170,7 @@ class MeetingAttendance(models.Model):
         Participant,
         on_delete=models.CASCADE,
         related_name="meeting_attendances",
-        verbose_name="المشارك",
+        verbose_name="المشاركة",
     )
     week_start_date = models.DateField(verbose_name="بداية الأسبوع")
     attended = models.BooleanField(default=False, verbose_name="حضر؟")
@@ -179,7 +180,7 @@ class MeetingAttendance(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         limit_choices_to={"role": Role.GROUP_SUPERVISOR},
-        verbose_name="سجّله",
+        verbose_name="سجّلته",
     )
 
     class Meta:
@@ -237,13 +238,13 @@ class WeeklyTask(models.Model):
     allowed_formats = models.CharField(
         max_length=50,
         verbose_name="الصيغ المسموحة",
-        help_text="يمكن اختيار أكثر من صيغة، يكفي المشارك تقديم واحدة منها",
+        help_text="يمكن اختيار أكثر من صيغة، يكفي المشاركة تقديم واحدة منها",
     )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         null=True,
-        verbose_name="أنشأها",
+        verbose_name="أنشأتها",
     )
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="تاريخ الإنشاء")
 
@@ -293,7 +294,7 @@ class TaskSubmission(models.Model):
         Participant,
         on_delete=models.CASCADE,
         related_name="task_submissions",
-        verbose_name="المشارك",
+        verbose_name="المشاركة",
     )
     file = models.FileField(
         upload_to="task_submissions/%Y/%W/",
@@ -316,7 +317,7 @@ class TaskSubmission(models.Model):
     rejection_reason = models.TextField(
         blank=True,
         verbose_name="سبب الرفض",
-        help_text="يظهر للمشارك عند رفض تسليمه",
+        help_text="يظهر للمشاركة عند رفض تسليمها",
     )
     reopened_for_resubmission = models.BooleanField(
         default=False,
@@ -329,7 +330,7 @@ class TaskSubmission(models.Model):
         null=True,
         blank=True,
         related_name="+",
-        verbose_name="راجعها",
+        verbose_name="راجعتها",
     )
     reviewed_at = models.DateTimeField(null=True, blank=True, verbose_name="تاريخ المراجعة")
 
@@ -444,7 +445,7 @@ class StoreOrder(models.Model):
         Participant,
         on_delete=models.CASCADE,
         related_name="store_orders",
-        verbose_name="المشارك",
+        verbose_name="المشاركة",
     )
     product = models.ForeignKey(
         StoreProduct,
@@ -496,7 +497,7 @@ class PointsLedgerEntry(models.Model):
         Participant,
         on_delete=models.CASCADE,
         related_name="points_ledger_entries",
-        verbose_name="المشارك",
+        verbose_name="المشاركة",
     )
     # Signed on purpose (not PositiveIntegerField) — a correction (e.g. an
     # attendance edit that lowers a previous grant) or a manual deduction
@@ -541,7 +542,7 @@ class PointsResetSnapshot(models.Model):
         Participant,
         on_delete=models.CASCADE,
         related_name="points_snapshots",
-        verbose_name="المشارك",
+        verbose_name="المشاركة",
     )
     points_before_reset = models.PositiveIntegerField(verbose_name="النقاط قبل التصفير")
     reset_at = models.DateTimeField(auto_now_add=True, verbose_name="تاريخ التصفير")
@@ -550,7 +551,7 @@ class PointsResetSnapshot(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         related_name="+",
-        verbose_name="نفّذه",
+        verbose_name="نفّذته",
     )
 
     class Meta:
@@ -576,7 +577,7 @@ class WeeklyActivityAttendance(models.Model):
         Participant,
         on_delete=models.CASCADE,
         related_name="weekly_activity_attendances",
-        verbose_name="المشارك",
+        verbose_name="المشاركة",
     )
     date = models.DateField(verbose_name="التاريخ")
     attended = models.BooleanField(default=False, verbose_name="حاضر؟")
@@ -584,7 +585,7 @@ class WeeklyActivityAttendance(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         null=True,
-        verbose_name="سجّله",
+        verbose_name="سجّلته",
     )
 
     class Meta:

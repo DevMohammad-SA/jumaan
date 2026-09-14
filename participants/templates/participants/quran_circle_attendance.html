@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}الحلقة القرآنية — رحّال{% endblock %}
+{% block title %}الحلقة القرآنية — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 table.roster{
@@ -72,7 +72,7 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
   border-radius:99px;
   margin-top:var(--s1);
 }
-.btn:hover{background:#1f2225}
+.btn:hover{background:#182228}
 
 .date-bar{
   display:flex;
@@ -140,13 +140,13 @@ table.roster input[type="checkbox"]{
 {% block content %}
   <h1 class="page-title">تسجيل الحلقة القرآنية</h1>
   <p class="page-sub">
-    {% if group %}بيئة <b>{{ group.name }}</b> · {% endif %}اختر التاريخ{% if not is_group_locked %} والبيئة{% endif %}، ثم علّم حضور وإنجاز مشاركي الحلقة واحفظ الجدول دفعة واحدة. حضور الحلقة = 3 نقاط، إنجاز الحلقة = 2 نقطة.
+    {% if group %}فصل <b>{{ group.name }}</b> · {% endif %}اختاري التاريخ{% if not is_group_locked %} والفصل{% endif %}، ثم علّمي حضور وإنجاز مشاركات الحلقة واحفظي الجدول دفعة واحدة. حضور الحلقة = 3 نقاط، إنجاز الحلقة = 2 نقطة.
   </p>
 
   <section class="card">
     <h2>
       {% if is_group_locked %}
-        الحلقة القرآنية — بيئة {{ group.name }}
+        الحلقة القرآنية — فصل {{ group.name }}
       {% else %}
         الحلقة القرآنية
       {% endif %}
@@ -160,9 +160,9 @@ table.roster input[type="checkbox"]{
 
       {% if not is_group_locked %}
         <div class="field">
-          <label for="circle-group">البيئة</label>
+          <label for="circle-group">الفصل</label>
           <select id="circle-group" name="group">
-            <option value="">— اختر البيئة —</option>
+            <option value="">— اختاري الفصل —</option>
             {% for g in all_groups %}
               <option value="{{ g.id }}"{% if group and g.id == group.id %} selected{% endif %}>{{ g.name }}</option>
             {% endfor %}
@@ -175,12 +175,12 @@ table.roster input[type="checkbox"]{
 
     {% if not group %}
       {% if is_group_locked %}
-        <p class="empty-note">لا توجد بيئة مرتبطة بحسابك بعد. تواصل مع الإدارة لربط بيئتك.</p>
+        <p class="empty-note">لا يوجد فصل مرتبط بحسابكِ بعد. تواصلي مع الإدارة لربط فصلكِ.</p>
       {% else %}
-        <p class="empty-note">اختر بيئة من القائمة أعلاه لعرض مشاركيها.</p>
+        <p class="empty-note">اختاري فصلًا من القائمة أعلاه لعرض مشاركاته.</p>
       {% endif %}
     {% elif roster %}
-      <input type="text" id="roster-search" class="roster-search" placeholder="ابحث بالاسم أو رقم الهوية…" autocomplete="off">
+      <input type="text" id="roster-search" class="roster-search" placeholder="ابحثي بالاسم أو رقم الهوية…" autocomplete="off">
 
       <form method="post" action="{% url 'participants:quran_circle_attendance' %}">
         {% csrf_token %}
@@ -230,7 +230,7 @@ table.roster input[type="checkbox"]{
         </div>
       </form>
     {% else %}
-      <p class="empty-note">لا يوجد مشاركون في هذه البيئة حتى الآن.</p>
+      <p class="empty-note">لا توجد مشاركات في هذا الفصل حتى الآن.</p>
     {% endif %}
   </section>
 {% endblock %}

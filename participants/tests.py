@@ -477,7 +477,7 @@ class ParticipantsDataPDFExportTests(TestCase):
 
         html = self._rendered_html()
         self.assertIn("images/letterhead.png", html)
-        self.assertIn("تقرير بيانات المشاركين", html)
+        self.assertIn("تقرير بيانات المشاركات", html)
 
         base_url = self._fake.HTML.call_args.kwargs["base_url"]
         self.assertTrue(base_url.startswith("http"))

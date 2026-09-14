@@ -20,7 +20,7 @@ class GroupAdmin(ModelAdmin):
     # dual-list picker for assigning several supervisors to one environment.
     filter_horizontal = ('supervisor',)
 
-    @admin.display(description="المشرفون")
+    @admin.display(description="المشرفات")
     def get_supervisors(self, obj):
         return "، ".join(s.full_name for s in obj.supervisor.all()) or "—"
 

@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}استيراد المشاركين — رحّال{% endblock %}
+{% block title %}استيراد المشاركات — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 .upload-form label{
@@ -24,7 +24,7 @@
 .upload-form .helptext{display:block;margin-top:6px;font-family:var(--font-ui);font-size:12px;color:var(--slate)}
 
 .form-error{
-  background:#FBEEEA;
+  background:#FDEEE6;
   border:1px solid var(--alert);
   border-radius:var(--r-sm);
   padding:12px 14px;
@@ -35,7 +35,7 @@
 }
 
 .result-ok{
-  background:#EBF1EC;
+  background:#E3F2E2;
   border:1px solid var(--done);
   border-radius:var(--r-sm);
   padding:12px 14px;
@@ -89,17 +89,17 @@ table.report tr:last-child td{border-bottom:none}
   border-radius:99px;
   margin-top:var(--s2);
 }
-.btn:hover{background:#1f2225}
+.btn:hover{background:#182228}
 {% endblock %}
 
 {% block content %}
-  <h1 class="page-title">استيراد المشاركين من ملف إكسل</h1>
-  <p class="page-sub">ارفع قالب الإكسل المعبّأ لإنشاء حسابات المشاركين وبياناتهم البرنامجية دفعة واحدة. تُستورد الصفوف الصحيحة فقط، ويظهر تقرير مفصّل بالصفوف المرفوضة.</p>
+  <h1 class="page-title">استيراد المشاركات من ملف إكسل</h1>
+  <p class="page-sub">ارفعي قالب الإكسل المعبّأ لإنشاء حسابات المشاركات وبياناتهن البرنامجية دفعة واحدة. تُستورد الصفوف الصحيحة فقط، ويظهر تقرير مفصّل بالصفوف المرفوضة.</p>
 
   <section class="card">
     <h2>رفع الملف</h2>
     {% if form.errors %}
-      <div class="form-error">تعذّر قبول الملف. تأكد من اختيار ملف إكسل صالح ثم أعد المحاولة.</div>
+      <div class="form-error">تعذّر قبول الملف. تأكدي من اختيار ملف إكسل صالح ثم أعيدي المحاولة.</div>
     {% endif %}
     <form class="upload-form" method="post" enctype="multipart/form-data">
       {% csrf_token %}
@@ -119,10 +119,10 @@ table.report tr:last-child td{border-bottom:none}
       {% if import_result.error %}
         <div class="form-error">{{ import_result.error }}</div>
       {% else %}
-        <div class="result-ok">تم استيراد {{ import_result.created_count }} مشارك بنجاح.</div>
+        <div class="result-ok">تم استيراد {{ import_result.created_count }} مشاركة بنجاح.</div>
 
         {% if import_result.rejected_rows %}
-          <div class="form-error">تم رفض {{ import_result.rejected_rows|length }} صفًّا. راجع التفاصيل أدناه وصحّحها ثم أعد رفع الملف.</div>
+          <div class="form-error">تم رفض {{ import_result.rejected_rows|length }} صفًّا. راجعي التفاصيل أدناه وصحّحيها ثم أعيدي رفع الملف.</div>
           <div class="report-scroll">
             <table class="report">
               <thead>

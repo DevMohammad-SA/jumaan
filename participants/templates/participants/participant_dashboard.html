@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}لوحتي — رحّال{% endblock %}
+{% block title %}لوحتي — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 .wrap{max-width:880px}
@@ -101,7 +101,7 @@
   border:3px solid var(--gold);
 }
 .range-track .me:after{
-  content:"أنت";
+  content:"أنتِ";
   position:absolute;
   top:-30px;
   right:50%;
@@ -161,7 +161,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1 class="page-title">هلا، {{ participant.user.full_name|default:"رحّالنا" }} 👋</h1>
+  <h1 class="page-title">هلا، {{ participant.user.full_name|default:"مشاركتنا" }} 👋</h1>
 
   <div class="currency-grid">
     <div class="currency-card miles">
@@ -192,7 +192,7 @@
         <span>الأقل أميالًا<br><b>{{ program_range.min_miles }}</b></span>
         <span style="text-align:left">الأعلى أميالًا<br><b>{{ program_range.max_miles }}</b></span>
       </div>
-      <p class="range-note">هذا موقعك بين كل مشاركي البرنامج 📍</p>
+      <p class="range-note">هذا موقعكِ بين كل مشاركات البرنامج 📍</p>
     {% else %}
       <p class="empty-note">ما فيه بيانات كافية لعرض مقارنة البرنامج حاليًا 🤷</p>
     {% endif %}
@@ -207,9 +207,9 @@
             <div>
               <div class="ledger-text">
                 {% if entry.points_delta > 0 %}
-                  انضافت لك {{ entry.points_delta }} نقطة عشان {{ entry.description }} ✅
+                  انضافت لكِ {{ entry.points_delta }} نقطة عشان {{ entry.description }} ✅
                 {% else %}
-                  انخصمت منك {{ entry.points_delta|cut:"-" }} نقطة عشان {{ entry.description }} ⚠️
+                  انخصمت منكِ {{ entry.points_delta|cut:"-" }} نقطة عشان {{ entry.description }} ⚠️
                 {% endif %}
               </div>
               <div class="ledger-date">{{ entry.created_at|date:"Y-m-d H:i" }}</div>
@@ -221,7 +221,7 @@
         {% endfor %}
       </div>
     {% else %}
-      <p class="empty-note">لسه ما فيه شي بسجلك — أول نقطة تجيك بتظهر هنا! 🎉</p>
+      <p class="empty-note">لسه ما فيه شي بسجلكِ — أول نقطة تجيكِ بتظهر هنا! 🎉</p>
     {% endif %}
   </section>
 {% endblock %}

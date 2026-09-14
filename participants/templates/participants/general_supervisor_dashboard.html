@@ -1,11 +1,11 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}لوحة المشرف العام — رحّال{% endblock %}
+{% block title %}لوحة المشرفة العامة — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 .warn-note{
-  background:#FBEEEA;
+  background:#FDEEE6;
   border:1px solid var(--alert);
   border-radius:var(--r-sm);
   padding:12px 14px;
@@ -73,21 +73,21 @@
   margin-top:var(--s2);
   text-decoration:none;
 }
-.btn:hover{background:#1f2225}
+.btn:hover{background:#182228}
 
 .btn-danger{
   background:var(--alert);
 }
-.btn-danger:hover{background:#9a4632}
+.btn-danger:hover{background:#C2571D}
 {% endblock %}
 
 {% block content %}
-  <h1 class="page-title">لوحة المشرف العام</h1>
-  <p class="page-sub">إدارة بيانات المشاركين على مستوى البرنامج بالكامل.</p>
+  <h1 class="page-title">لوحة المشرفة العامة</h1>
+  <p class="page-sub">إدارة بيانات المشاركات على مستوى البرنامج بالكامل.</p>
 
   <div class="kpi-grid">
     <div class="kpi-card">
-      <div class="kpi-label">إجمالي المشاركين</div>
+      <div class="kpi-label">إجمالي المشاركات</div>
       <div class="kpi-value">{{ kpi_total_participants }}</div>
     </div>
     <div class="kpi-card">
@@ -104,7 +104,7 @@
 
   <div class="chart-grid">
     <section class="card">
-      <h2>عدد المشاركين لكل بيئة</h2>
+      <h2>عدد المشاركات لكل فصل</h2>
       <canvas id="chartGroups"></canvas>
     </section>
 
@@ -118,7 +118,7 @@
     </section>
 
     <section class="card">
-      <h2>متوسط النقاط لكل بيئة</h2>
+      <h2>متوسط النقاط لكل فصل</h2>
       <canvas id="chartAvgPoints"></canvas>
     </section>
 
@@ -131,14 +131,14 @@
   {{ charts_data|json_script:"charts-data" }}
 
   <section class="card">
-    <h2>استيراد المشاركين</h2>
-    <p>أنشئ حسابات المشاركين وبياناتهم البرنامجية دفعة واحدة من ملف إكسل معبّأ.</p>
+    <h2>استيراد المشاركات</h2>
+    <p>أنشئي حسابات المشاركات وبياناتهن البرنامجية دفعة واحدة من ملف إكسل معبّأ.</p>
     <a class="btn" href="{% url 'participants:import_participants' %}">فتح صفحة الاستيراد</a>
   </section>
 
   <section class="card">
-    <h2>بيانات المشاركين</h2>
-    <p>عرض تفصيلي لجميع المشاركين في كل البيئات، مع إمكانية البحث والفرز.</p>
+    <h2>بيانات المشاركات</h2>
+    <p>عرض تفصيلي لجميع المشاركات في كل الفصول، مع إمكانية البحث والفرز.</p>
     <a class="btn" href="{% url 'participants:participants_data' %}">فتح صفحة البيانات</a>
   </section>
 
@@ -162,16 +162,16 @@
   </section>
 
   <section class="card">
-    <h2>تصفير نقاط المشاركين</h2>
+    <h2>تصفير نقاط المشاركات</h2>
     <div class="warn-note">
-      هذا الإجراء يصفّر حقل <b>النقاط</b> لجميع المشاركين في كل البيئات دفعة واحدة،
+      هذا الإجراء يصفّر حقل <b>النقاط</b> لجميع المشاركات في كل الفصول دفعة واحدة،
       ولا يمكن التراجع عنه. لا يؤثر إطلاقًا على الأميال أو النقاط الشرائية.
     </div>
     <form method="post"
-          onsubmit="return confirm('هل أنت متأكد من تصفير نقاط جميع المشاركين؟ لا يمكن التراجع عن هذا الإجراء.')">
+          onsubmit="return confirm('هل أنتِ متأكدة من تصفير نقاط جميع المشاركات؟ لا يمكن التراجع عن هذا الإجراء.')">
       {% csrf_token %}
       <input type="hidden" name="action" value="reset_points">
-      <button type="submit" class="btn btn-danger">تصفير نقاط جميع المشاركين</button>
+      <button type="submit" class="btn btn-danger">تصفير نقاط جميع المشاركات</button>
     </form>
     <p style="margin-top:var(--s2)">
       <a href="{% url 'participants:points_snapshot_history' %}"
@@ -186,18 +186,18 @@
 (function () {
   var data = JSON.parse(document.getElementById("charts-data").textContent);
 
-  var goldColor = "#C79A3B";
-  var asphaltColor = "#2B2F33";
-  var doneColor = "#4E7A55";
-  var alertColor = "#B4553B";
-  var slateColor = "#5F676E";
+  var goldColor = "#40A595";
+  var asphaltColor = "#22303A";
+  var doneColor = "#3F8A3D";
+  var alertColor = "#F36F26";
+  var slateColor = "#56696C";
 
   new Chart(document.getElementById("chartGroups"), {
     type: "bar",
     data: {
       labels: data.groupLabels,
       datasets: [{
-        label: "عدد المشاركين",
+        label: "عدد المشاركات",
         data: data.groupCounts,
         backgroundColor: goldColor,
       }],
@@ -214,7 +214,7 @@
     new Chart(tasksCanvas, {
       type: "doughnut",
       data: {
-        labels: ["مقبول", "مرفوض", "قيد المراجعة", "لم يسلّم"],
+        labels: ["مقبولة", "مرفوضة", "قيد المراجعة", "لم تُسلَّم"],
         datasets: [{
           data: data.taskData,
           backgroundColor: [doneColor, alertColor, goldColor, slateColor],

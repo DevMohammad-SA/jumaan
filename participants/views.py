@@ -239,7 +239,7 @@ def build_navbar(user, active_key):
                 "participants:weekly_activity_attendance",
                 ICON_ACTIVITY,
             ),
-            ("data", "بيانات المشاركين", "participants:participants_data", ICON_DATA),
+            ("data", "بيانات المشاركات", "participants:participants_data", ICON_DATA),
             (
                 "points_ledger",
                 "سجل النقاط",
@@ -277,7 +277,7 @@ def build_navbar(user, active_key):
             ("import", "الاستيراد", "participants:import_participants", ICON_IMPORT),
             (
                 "add_participant",
-                "إضافة طالب",
+                "إضافة طالبة",
                 "participants:add_participant",
                 ICON_ADD_PARTICIPANT,
             ),
@@ -293,7 +293,7 @@ def build_navbar(user, active_key):
                 "participants:weekly_activity_attendance",
                 ICON_ACTIVITY,
             ),
-            ("data", "بيانات المشاركين", "participants:participants_data", ICON_DATA),
+            ("data", "بيانات المشاركات", "participants:participants_data", ICON_DATA),
             (
                 "extra_points",
                 "نقاط إضافية",
@@ -481,7 +481,7 @@ class ParticipantDashboardView(LoginRequiredMixin, TemplateView):
             return {
                 "eliteStatus": "not_qualified",
                 "difference": difference,
-                "message": f"باقي عليك {difference} نقطة توصل رحلة النخبة 🚀",
+                "message": f"باقي عليكِ {difference} نقطة توصلين رحلة النخبة 🚀",
             }
         else:
             rank_21_points = points_at_rank(21)
@@ -491,13 +491,13 @@ class ParticipantDashboardView(LoginRequiredMixin, TemplateView):
                 return {
                     "eliteStatus": "qualified",
                     "difference": None,
-                    "message": "أنت ضمن المرشحين لرحلة النخبة",
+                    "message": "أنتِ ضمن المرشحات لرحلة النخبة",
                 }
             difference = participant.points - rank_21_points
             return {
                 "eliteStatus": "qualified",
                 "difference": difference,
-                "message": f"متقدم بـ{difference} نقطة، حافظ على مكانك 💪",
+                "message": f"متقدمة بـ{difference} نقطة، حافظي على مكانكِ 💪",
             }
 
     def _build_range(self, queryset, participant):
@@ -981,15 +981,16 @@ class WeeklyActivityAttendanceView(LoginRequiredMixin, UserPassesTestMixin, Temp
 # AcademicStage.choices in participants/models.py — matches exactly, no
 # correction needed.
 ACADEMIC_STAGE_LABEL_TO_VALUE = {
-    "خامس ابتدائي": "grade_5",
-    "سادس ابتدائي": "grade_6",
     "أول متوسط": "grade_7",
     "ثاني متوسط": "grade_8",
     "ثالث متوسط": "grade_9",
+    "أول ثانوي": "grade_10",
+    "ثاني ثانوي": "grade_11",
+    "ثالث ثانوي": "grade_12",
 }
 
 # The import template ships with a frozen sheet name and a fixed column order.
-IMPORT_SHEET_NAME = "المشاركون"
+IMPORT_SHEET_NAME = "المشاركات"
 # Row 1 = headers, row 2 = the italic example row (always skipped regardless of
 # its content), so real data begins at row 3.
 IMPORT_FIRST_DATA_ROW = 3
@@ -1035,7 +1036,7 @@ class ParticipantImportView(LoginRequiredMixin, UserPassesTestMixin, FormView):
         try:
             workbook = openpyxl.load_workbook(excel_file, data_only=True)
         except Exception:
-            return {"error": "تعذّرت قراءة الملف. تأكد أنه ملف إكسل صالح بصيغة xlsx."}
+            return {"error": "تعذّرت قراءة الملف. تأكدي أنه ملف إكسل صالح بصيغة xlsx."}
 
         if IMPORT_SHEET_NAME not in workbook.sheetnames:
             return {"error": f'الملف لا يحتوي على ورقة باسم "{IMPORT_SHEET_NAME}".'}
@@ -1074,7 +1075,7 @@ class ParticipantImportView(LoginRequiredMixin, UserPassesTestMixin, FormView):
                     rejected_rows.append(
                         {
                             "row": row_number,
-                            "reason": f'البيئة "{group_name}" غير موجودة بالنظام',
+                            "reason": f'الفصل "{group_name}" غير موجود بالنظام',
                         }
                     )
                     continue
@@ -1933,7 +1934,7 @@ class StoreView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
         if participant.purchase_points < product.price:
             messages.error(
                 request,
-                f'رصيدك ما يكفي لطلب "{product.name}" 💰',
+                f'رصيدكِ ما يكفي لطلب "{product.name}" 💰',
             )
             return redirect("participants:store")
 
@@ -1955,7 +1956,7 @@ class StoreView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
             if participant.purchase_points < product.price:
                 messages.error(
                     request,
-                    f'رصيدك ما يكفي لطلب "{product.name}" 💰',
+                    f'رصيدكِ ما يكفي لطلب "{product.name}" 💰',
                 )
                 return redirect("participants:store")
 
@@ -1975,7 +1976,7 @@ class StoreView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
 
         messages.success(
             request,
-            f'تمّ طلبك "{product.name}" ✅ تقدر تتابعه من تبويب "طلباتي"',
+            f'تمّ طلبكِ "{product.name}" ✅ تقدرين تتابعينه من تبويب "طلباتي"',
         )
         return redirect("participants:store")
 

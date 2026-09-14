@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}المهمة الأسبوعية — رحّال{% endblock %}
+{% block title %}المهمة الأسبوعية — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 .wrap{max-width:640px}
@@ -76,7 +76,7 @@
   margin-top:var(--s2);
   text-decoration:none;
 }
-.btn:hover{background:#1f2225}
+.btn:hover{background:#182228}
 
 .status-pill{
   display:inline-block;
@@ -85,9 +85,9 @@
   font-size:12px;
   font-weight:700;
 }
-.status-pending{background:var(--gold-soft); color:var(--gold-ink)}
-.status-accepted{background:#E4EFE5; color:var(--done)}
-.status-rejected{background:#FBEEEA; color:var(--alert)}
+.status-pending{background:var(--pending-bg); color:var(--pending-ink)}
+.status-accepted{background:#E3F2E2; color:var(--done)}
+.status-rejected{background:#FDEEE6; color:var(--alert)}
 .rejection-note{
   font-family:var(--font-ui);
   font-size:13px;
@@ -96,7 +96,7 @@
 }
 
 .warn-note{
-  background:#FBEEEA;
+  background:#FDEEE6;
   border:1px solid var(--alert);
   border-radius:var(--r-sm);
   padding:12px 14px;
@@ -127,7 +127,7 @@
     {% elif existing_submission and not existing_submission.reopened_for_resubmission %}
       <h2>{{ task.title }}</h2>
       {% if existing_submission.file %}
-        <p>تم رفع ملفك لهذي المهمة بتاريخ {{ existing_submission.submitted_at }} ✅</p>
+        <p>تم رفع ملفكِ لهذي المهمة بتاريخ {{ existing_submission.submitted_at }} ✅</p>
       {% else %}
         <p>تم تسليم النص التالي لهذي المهمة بتاريخ {{ existing_submission.submitted_at }} ✅</p>
         <p class="task-meta" style="white-space:pre-wrap">{{ existing_submission.text_content }}</p>
@@ -150,7 +150,7 @@
     {% else %}
       <h2>{{ task.title }}</h2>
       {% if existing_submission and existing_submission.reopened_for_resubmission %}
-        <div class="info-note">المشرف فتح لك تسليم هذي المهمة من جديد 🔓 تقدر ترفع ملف جديد الحين.</div>
+        <div class="info-note">المشرفة فتحت لكِ تسليم هذي المهمة من جديد 🔓 تقدرين ترفعين ملف جديد الحين.</div>
       {% endif %}
       <p>{{ task.description }}</p>
       <div class="task-meta">
@@ -169,7 +169,7 @@
         {% csrf_token %}
         {% with allowed=task.get_allowed_formats_list %}
           {% if allowed|length > 1 %}
-            <p class="task-meta">قدّم أحد الصيغ التالية فقط (ملفًا أو نصًا، وليس كليهما):</p>
+            <p class="task-meta">قدّمي أحد الصيغ التالية فقط (ملفًا أو نصًا، وليس كليهما):</p>
           {% endif %}
           {% if "text" not in allowed or allowed|length > 1 %}
             <div class="field">

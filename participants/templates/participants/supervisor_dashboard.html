@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}لوحة مشرف البيئة — رحّال{% endblock %}
+{% block title %}لوحة مشرفة الفصل — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 table.roster{
@@ -73,7 +73,7 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
   border-radius:99px;
   margin-top:var(--s1);
 }
-.btn:hover{background:#1f2225}
+.btn:hover{background:#182228}
 
 .date-bar{
   display:flex;
@@ -140,18 +140,18 @@ table.roster input[type="checkbox"]{
 {% block content %}
   <h1 class="page-title">تحضير اللقاء الأسبوعي</h1>
   <p class="page-sub">
-    {% if group %}بيئة <b>{{ group.name }}</b> · {% endif %}اختر تاريخ اللقاء، ثم علّم حضور مشاركي بيئتك واحفظ الجدول دفعة واحدة. اضغط على عنوان أي عمود للفرز حسبه.
+    {% if group %}فصل <b>{{ group.name }}</b> · {% endif %}اختاري تاريخ اللقاء، ثم علّمي حضور مشاركات فصلكِ واحفظي الجدول دفعة واحدة. اضغطي على عنوان أي عمود للفرز حسبه.
   </p>
 
-  <p><a href="{% url 'participants:participants_data' %}" class="btn-inline">بيانات المشاركين</a></p>
+  <p><a href="{% url 'participants:participants_data' %}" class="btn-inline">بيانات المشاركات</a></p>
 
   {% if not group %}
     <div class="card">
-      <p class="empty-note">لا توجد بيئة مرتبطة بحسابك بعد. تواصل مع الإدارة لربط بيئتك قبل بدء التحضير.</p>
+      <p class="empty-note">لا يوجد فصل مرتبط بحسابكِ بعد. تواصلي مع الإدارة لربط فصلكِ قبل بدء التحضير.</p>
     </div>
   {% else %}
     <section class="card">
-      <h2>تحضير بيئة {{ group.name }}</h2>
+      <h2>تحضير فصل {{ group.name }}</h2>
 
       <form class="date-bar" method="get" action="{% url 'participants:supervisor_dashboard' %}">
         <div class="field">
@@ -162,7 +162,7 @@ table.roster input[type="checkbox"]{
       </form>
 
       {% if roster %}
-        <input type="text" id="roster-search" class="roster-search" placeholder="ابحث بالاسم أو رقم الهوية…" autocomplete="off">
+        <input type="text" id="roster-search" class="roster-search" placeholder="ابحثي بالاسم أو رقم الهوية…" autocomplete="off">
 
         <form method="post" action="{% url 'participants:supervisor_dashboard' %}">
           {% csrf_token %}
@@ -211,7 +211,7 @@ table.roster input[type="checkbox"]{
           </div>
         </form>
       {% else %}
-        <p class="empty-note">لا يوجد مشاركون في هذه البيئة حتى الآن.</p>
+        <p class="empty-note">لا توجد مشاركات في هذا الفصل حتى الآن.</p>
       {% endif %}
     </section>
   {% endif %}

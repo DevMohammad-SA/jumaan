@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}سجل عمليات التصفير — رحّال{% endblock %}
+{% block title %}سجل عمليات التصفير — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 .archive-layout{display:grid; grid-template-columns:280px 1fr; gap:var(--s3); align-items:start}
@@ -32,8 +32,8 @@ table.roster td.num-cell{text-align:center; font-variant-numeric:tabular-nums; f
 {% block content %}
   <h1 class="page-title">سجل عمليات التصفير السابقة</h1>
   <p class="page-sub">
-    كل عملية تصفير لنقاط المشاركين تحفظ تلقائيًا لقطة بقيمة نقاط كل مشارك في تلك اللحظة، قبل التصفير.
-    اختر عملية من القائمة لعرض ترتيب المشاركين وقتها.
+    كل عملية تصفير لنقاط المشاركات تحفظ تلقائيًا لقطة بقيمة نقاط كل مشاركة في تلك اللحظة، قبل التصفير.
+    اختاري عملية من القائمة لعرض ترتيب المشاركات وقتها.
   </p>
 
   <div class="archive-layout">
@@ -53,21 +53,21 @@ table.roster td.num-cell{text-align:center; font-variant-numeric:tabular-nums; f
       {% if not selected_snapshots %}
         <section class="card">
           <p class="empty-note">
-            {% if reset_events %}اختر عملية تصفير من القائمة لعرض تفاصيلها.{% else %}لن تظهر أي بيانات هنا حتى تُنفَّذ أول عملية تصفير.{% endif %}
+            {% if reset_events %}اختاري عملية تصفير من القائمة لعرض تفاصيلها.{% else %}لن تظهر أي بيانات هنا حتى تُنفَّذ أول عملية تصفير.{% endif %}
           </p>
         </section>
       {% else %}
         <section class="card">
           <h2 style="margin-top:0">
-            المشاركون وقت التصفير ({{ selected_snapshots|length }})
+            المشاركات وقت التصفير ({{ selected_snapshots|length }})
           </h2>
           <div class="table-scroll">
             <table class="roster">
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>المشارك</th>
-                  <th>البيئة</th>
+                  <th>المشاركة</th>
+                  <th>الفصل</th>
                   <th>النقاط وقت التصفير</th>
                 </tr>
               </thead>
@@ -76,7 +76,7 @@ table.roster td.num-cell{text-align:center; font-variant-numeric:tabular-nums; f
                   <tr>
                     <td>{{ forloop.counter }}</td>
                     <td>{{ snapshot.participant.user.full_name|default:"—" }}</td>
-                    <td>{{ snapshot.participant.group.name|default:"بدون بيئة" }}</td>
+                    <td>{{ snapshot.participant.group.name|default:"بدون فصل" }}</td>
                     <td class="num-cell">{{ snapshot.points_before_reset }}</td>
                   </tr>
                 {% endfor %}

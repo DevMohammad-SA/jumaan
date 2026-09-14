@@ -40,10 +40,10 @@ class UserManager(BaseUserManager):
 
 
 class Role(models.TextChoices):
-    PARTICIPANT = "participant", "مشارك"
-    GROUP_SUPERVISOR = "group_supervisor", "مشرف بيئة"
-    GENERAL_SUPERVISOR = "general_supervisor", "مشرف عام"
-    SUPERADMIN = "superadmin", "مشرف النظام"
+    PARTICIPANT = "participant", "مشاركة"
+    GROUP_SUPERVISOR = "group_supervisor", "مشرفة فصل"
+    GENERAL_SUPERVISOR = "general_supervisor", "مشرفة عامة"
+    SUPERADMIN = "superadmin", "مشرفة النظام"
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -57,21 +57,21 @@ class User(AbstractBaseUser, PermissionsMixin):
     """
 
     class Meta:
-        verbose_name = "المستخدم"
-        verbose_name_plural = "المستخدمين"
+        verbose_name = "المستخدمة"
+        verbose_name_plural = "المستخدمات"
 
     national_id = models.CharField(
         max_length=10, unique=True, blank=True,null=True, verbose_name="الهوية الوطنية / الإقامة"
     )
     username = models.CharField(
-        max_length=30, blank=True, unique=True, null=True, verbose_name="اسم المستخدم"
+        max_length=30, blank=True, unique=True, null=True, verbose_name="اسم المستخدمة"
     )
     role = models.CharField(max_length=30, choices=Role.choices, verbose_name="الدور")
     full_name = models.CharField(
         max_length=100, blank=True, verbose_name="الاسم الكامل"
     )
     is_active = models.BooleanField(default=True, verbose_name="الحساب نشط؟")
-    is_staff = models.BooleanField(default=False, verbose_name="حساب مشرف؟")
+    is_staff = models.BooleanField(default=False, verbose_name="حساب مشرفة؟")
     must_set_password = models.BooleanField(
         default=False,
         verbose_name="يجب تعيين كلمة مرور جديدة",
@@ -87,7 +87,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def clean(self):
         super().clean()
         if not self.username and not self.national_id:
-            raise ValidationError("يجب توفر اسم مستخدم أو رقم هوية على الأقل")
+            raise ValidationError("يجب توفر اسم مستخدمة أو رقم هوية على الأقل")
 
 
 class PasswordResetRequest(models.Model):
@@ -102,7 +102,7 @@ class PasswordResetRequest(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="password_reset_requests",
-        verbose_name="المستخدم",
+        verbose_name="المستخدمة",
     )
     requested_at = models.DateTimeField(auto_now_add=True, verbose_name="تاريخ الطلب")
     resolved = models.BooleanField(default=False, verbose_name="تمت المعالجة")
@@ -113,7 +113,7 @@ class PasswordResetRequest(models.Model):
         null=True,
         blank=True,
         related_name="+",
-        verbose_name="عالجها",
+        verbose_name="عالجتها",
     )
 
     class Meta:

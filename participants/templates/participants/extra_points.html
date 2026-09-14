@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}نقاط إضافية — رحّال{% endblock %}
+{% block title %}نقاط إضافية — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 .field{margin-bottom:var(--s2)}
@@ -68,7 +68,7 @@
   margin-top:var(--s2);
   text-decoration:none;
 }
-.btn:hover{background:#1f2225}
+.btn:hover{background:#182228}
 .btn-block{width:100%}
 
 .page-message{
@@ -78,14 +78,14 @@
   padding:12px 14px;
   margin-bottom:var(--s2);
 }
-.page-message--success{background:#E4EFE5; color:var(--done); border:1px solid var(--done)}
-.page-message--error{background:#FBEEEA; color:var(--alert); border:1px solid var(--alert)}
+.page-message--success{background:#E3F2E2; color:var(--done); border:1px solid var(--done)}
+.page-message--error{background:#FDEEE6; color:var(--alert); border:1px solid var(--alert)}
 {% endblock %}
 
 {% block content %}
   <h1 class="page-title">نقاط إضافية</h1>
   <p class="page-sub">
-    منح أو خصم نقاط يدويًا لمشارك مع ذكر السبب — تُسجَّل العملية تلقائيًا في سجل النقاط.
+    منح أو خصم نقاط يدويًا لمشاركة مع ذكر السبب — تُسجَّل العملية تلقائيًا في سجل النقاط.
   </p>
 
   {% if messages %}
@@ -99,7 +99,7 @@
       {% csrf_token %}
 
       <div class="field">
-        <label for="id_participant">المشارك</label>
+        <label for="id_participant">المشاركة</label>
         {{ form.participant }}
         {% if form.participant.errors %}<div class="errors">{{ form.participant.errors|join:"، " }}</div>{% endif %}
       </div>
@@ -107,7 +107,7 @@
       <div class="field">
         <label for="id_points">عدد النقاط</label>
         {{ form.points }}
-        <div class="hint">استخدم رقمًا سالبًا لخصم النقاط.</div>
+        <div class="hint">استخدمي رقمًا سالبًا لخصم النقاط.</div>
         {% if form.points.errors %}<div class="errors">{{ form.points.errors|join:"، " }}</div>{% endif %}
       </div>
 

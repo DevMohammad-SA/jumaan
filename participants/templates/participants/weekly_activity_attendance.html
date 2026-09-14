@@ -1,7 +1,7 @@
 {% extends "participants/app_base.html" %}
 {% load static %}
 
-{% block title %}فعالية الأسبوع — رحّال{% endblock %}
+{% block title %}فعالية الأسبوع — ملتقى جُمان للفتيات{% endblock %}
 
 {% block extra_style %}
 table.roster{
@@ -72,7 +72,7 @@ th.sortable:not(.sort-asc):not(.sort-desc) .sort-arrow:after{content:"▲▼"}
   border-radius:99px;
   margin-top:var(--s1);
 }
-.btn:hover{background:#1f2225}
+.btn:hover{background:#182228}
 
 .date-bar{
   display:flex;
@@ -140,13 +140,13 @@ table.roster input[type="checkbox"]{
 {% block content %}
   <h1 class="page-title">تسجيل فعالية الأسبوع</h1>
   <p class="page-sub">
-    {% if group %}بيئة <b>{{ group.name }}</b> · {% endif %}اختر التاريخ{% if not is_group_locked %} والبيئة{% endif %}، ثم علّم حضور مشاركي الفعالية واحفظ الجدول دفعة واحدة. حضور الفعالية = 10 نقاط.
+    {% if group %}فصل <b>{{ group.name }}</b> · {% endif %}اختاري التاريخ{% if not is_group_locked %} والفصل{% endif %}، ثم علّمي حضور مشاركات الفعالية واحفظي الجدول دفعة واحدة. حضور الفعالية = 10 نقاط.
   </p>
 
   <section class="card">
     <h2>
       {% if is_group_locked %}
-        فعالية الأسبوع — بيئة {{ group.name }}
+        فعالية الأسبوع — فصل {{ group.name }}
       {% else %}
         فعالية الأسبوع
       {% endif %}
@@ -160,9 +160,9 @@ table.roster input[type="checkbox"]{
 
       {% if not is_group_locked %}
         <div class="field">
-          <label for="activity-group">البيئة</label>
+          <label for="activity-group">الفصل</label>
           <select id="activity-group" name="group">
-            <option value="">— اختر البيئة —</option>
+            <option value="">— اختاري الفصل —</option>
             {% for g in all_groups %}
               <option value="{{ g.id }}"{% if group and g.id == group.id %} selected{% endif %}>{{ g.name }}</option>
             {% endfor %}
@@ -175,12 +175,12 @@ table.roster input[type="checkbox"]{
 
     {% if not group %}
       {% if is_group_locked %}
-        <p class="empty-note">لا توجد بيئة مرتبطة بحسابك بعد. تواصل مع الإدارة لربط بيئتك.</p>
+        <p class="empty-note">لا يوجد فصل مرتبط بحسابكِ بعد. تواصلي مع الإدارة لربط فصلكِ.</p>
       {% else %}
-        <p class="empty-note">اختر بيئة من القائمة أعلاه لعرض مشاركيها.</p>
+        <p class="empty-note">اختاري فصلًا من القائمة أعلاه لعرض مشاركاته.</p>
       {% endif %}
     {% elif roster %}
-      <input type="text" id="roster-search" class="roster-search" placeholder="ابحث بالاسم أو رقم الهوية…" autocomplete="off">
+      <input type="text" id="roster-search" class="roster-search" placeholder="ابحثي بالاسم أو رقم الهوية…" autocomplete="off">
 
       <form method="post" action="{% url 'participants:weekly_activity_attendance' %}">
         {% csrf_token %}
@@ -196,7 +196,7 @@ table.roster input[type="checkbox"]{
                 <th class="sortable" data-sort="number" data-col="2">الأميال<span class="sort-arrow"></span></th>
                 <th class="sortable" data-sort="number" data-col="3">النقاط<span class="sort-arrow"></span></th>
                 <th class="check-col">
-                  حاضر
+                  حاضرة
                   <button type="button" class="select-all" data-target="attended">تحديد الكل</button>
                 </th>
               </tr>
@@ -223,7 +223,7 @@ table.roster input[type="checkbox"]{
         </div>
       </form>
     {% else %}
-      <p class="empty-note">لا يوجد مشاركون في هذه البيئة حتى الآن.</p>
+      <p class="empty-note">لا توجد مشاركات في هذا الفصل حتى الآن.</p>
     {% endif %}
   </section>
 {% endblock %}

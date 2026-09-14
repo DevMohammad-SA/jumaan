@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}دخول المشارك — رحّال{% endblock %}
+{% block title %}دخول المشاركة — ملتقى جُمان للفتيات{% endblock %}
 
 {% block side_pitch %}
-<h2>سجّل حضورك،<br>واجمع أميالك.</h2>
-<p>كل حلقة وكل تسميع وكل مهمة تقربك خطوة من رحلة النخبة.</p>
+<h2>سجّلي حضوركِ،<br>واجمعي أميالكِ.</h2>
+<p>كل حلقة وكل تسميع وكل مهمة تقربكِ خطوة من رحلة النخبة.</p>
 {% endblock %}
 
 {% block form_content %}
-<div class="eyebrow">دخول المشارك</div>
-<h1>هلا فيك، رحّالنا</h1>
-<p class="lead">أدخل رقم الهوية أو الإقامة وكلمة المرور عشان تشوف أميالك ومهامك.</p>
+<div class="eyebrow">دخول المشاركة</div>
+<h1>هلا فيكِ</h1>
+<p class="lead">أدخلي رقم الهوية أو الإقامة وكلمة المرور عشان تشوفي أميالكِ ومهامكِ.</p>
 
 {% if messages %}
   {% for message in messages %}
-    <div class="form-error" style="background:#EAF3EC;border-color:var(--gold);color:var(--gold-ink)">{{ message }}</div>
+    <div class="form-error" style="background:#E3F2E2;border-color:var(--gold);color:var(--gold-ink)">{{ message }}</div>
   {% endfor %}
 {% endif %}
 
 {% if form.errors %}
-<div class="form-error">رقم الهوية أو كلمة المرور غير صحيحة، أو الحساب غير مفعّل. تأكد من البيانات وحاول مرة ثانية.</div>
+<div class="form-error">رقم الهوية أو كلمة المرور غير صحيحة، أو الحساب غير مفعّل. تأكدي من البيانات وحاولي مرة ثانية.</div>
 {% endif %}
 
 <form method="post" action="{% url 'accounts:login_participant' %}" novalidate>
@@ -48,7 +48,7 @@
       autocomplete="current-password"
       required
     >
-    <div class="hint">كلمة مرورك الأولى هي رقم هويتك نفسه.</div>
+    <div class="hint">كلمة مروركِ الأولى هي رقم هويتكِ نفسه.</div>
   </div>
   <button type="submit" class="btn btn-gold">دخول</button>
 </form>
@@ -58,6 +58,6 @@
 </div>
 
 <div class="switch-portal">
-  مشرف أو إداري؟ <a href="{% url 'accounts:login_supervisor' %}">ادخل من هنا</a>
+  مشرفة أو إدارية؟ <a href="{% url 'accounts:login_supervisor' %}">ادخلي من هنا</a>
 </div>
 {% endblock %}
