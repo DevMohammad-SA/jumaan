@@ -1,15 +1,13 @@
-# Ufuq (أُفق) — رحّال
+# Juman — ملتقى جُمان للفتيات
 
 Read this in Arabic: [README.ar.md](README.ar.md)
 
-Management platform for the **Horizon Program** (برنامج أُفق التنموي), a
-14‑week youth development program run by **Saqeel Society for Youth
-Development** (جمعية صقيل لتنمية الشباب). Supervisors record daily and weekly
-attendance and a weekly task; participants earn a triple‑currency reward and
-progress toward an "elite trip" nomination. The end‑user product is branded
-**رحّال** ("Rahhal") — the domain name "Ufuq" and internal features like the
-Quran circle stay in the code/model names, but have been removed from
-participant‑facing copy.
+Management platform for **Juman Girls' Forum** (ملتقى جُمان للفتيات), an
+educational forum affiliated with the association, for middle‑ and
+high‑school female students. Supervisors record daily and weekly attendance
+(including a Quran circle) and a weekly task; participants earn a
+triple‑currency reward and progress toward an "elite trip" nomination
+(رحلة النخبة). The end‑user product is branded **جُمان** ("Juman").
 
 The entire UI and domain language is **Arabic** (`ar-sa`, `Asia/Riyadh`,
 right‑to‑left). This file is in English for GitHub; **[`README.ar.md`](README.ar.md) is the
@@ -18,7 +16,7 @@ Arabic version.** Detailed technical docs are in [`docs/`](docs/), and
 
 ## Overview
 
-- Participants belong to an **environment** (بيئة / `Group`), which one or
+- Participants belong to a **class** (فصل / `Group`), which one or
   more group supervisors can be assigned to (`Group.supervisor` is a
   many‑to‑many field).
 - As supervisors record attendance and review tasks, participants earn a
@@ -54,10 +52,10 @@ Defined in `accounts/models.py` (`Role`):
 
 | Role | Arabic | Summary |
 | --- | --- | --- |
-| `participant` | مشارك | Logs in with **national ID + password**. Personal dashboard (with an embedded points ledger and the elite‑trip indicator), weekly task upload, store. |
-| `group_supervisor` | مشرف بيئة | Records weekly‑gathering, Quran‑circle, and weekly‑activity attendance for **their own environment(s) only**; views their group's participant data and points ledger. |
-| `general_supervisor` | مشرف عام | Program‑wide: Excel import, single‑participant add form, weekly tasks, store management, manual extra‑points grants, points reset, full points ledger, all environments. |
-| `superadmin` | مشرف النظام | Same permissions as general supervisor in every view, plus Django admin (`is_staff`/`is_superuser`). |
+| `participant` | مشاركة | Logs in with **national ID + password**. Personal dashboard (with an embedded points ledger and the elite‑trip indicator), weekly task upload, store. |
+| `group_supervisor` | مشرفة فصل | Records weekly‑gathering, Quran‑circle, and weekly‑activity attendance for **their own class(es) only**; views their group's participant data and points ledger. |
+| `general_supervisor` | مشرفة عامة | Program‑wide: Excel import, single‑participant add form, weekly tasks, store management, manual extra‑points grants, points reset, full points ledger, all classes. |
+| `superadmin` | مشرفة النظام | Same permissions as general supervisor in every view, plus Django admin (`is_staff`/`is_superuser`). |
 
 Full permission matrix: [`docs/roles-and-permissions.md`](docs/roles-and-permissions.md).
 
@@ -208,6 +206,7 @@ those notes. See [`CHANGELOG.md`](CHANGELOG.md) for the release history.
 
 ## License / ownership
 
-Developed for **Saqeel Society for Youth Development** (جمعية صقيل لتنمية
-الشباب) for Ufuq Program. No open‑source license file is present in the
-repository; all rights are held by the association unless stated otherwise.
+Developed by **Mohammad Albuainain** for the association running **Juman
+Girls' Forum** (ملتقى جُمان للفتيات). No open‑source license file is present
+in the repository; all rights are held by the association unless stated
+otherwise.
