@@ -1,0 +1,49 @@
+/*
+ * تخصيصات جُمان فوق ثيم Unfold — يُحمَّل عبر UNFOLD["STYLES"] الرسمي
+ * (config/settings.py). لا يُعدَّل أي ملف داخل حزمة unfold نفسها.
+ */
+
+/*
+ * أيقونة "arrow_back" في unauthenticated_header.html (منسوخ ومُعدَّل في
+ * templates/unfold/helpers/) تشير دائمًا لليسار بحكم رسمها في خط Material
+ * Symbols، ولا تنعكس تلقائيًا مع dir="rtl". هذا الموقع RTL بالكامل دائمًا
+ * (لا يوجد تبديل لغة)، فنعكسها أفقيًا لتُشير لليمين مطابقةً لاتجاه "الرجوع"
+ * في قراءة من اليمين لليسار.
+ */
+.jumaan-rtl-mirror {
+    transform: scaleX(-1);
+}
+
+/*
+ * نص أبيض فوق primary-600 الحرفي (#40A595) يعطي تباينًا 2.99:1 فقط مع
+ * الأبيض — أقل من حد WCAG AA للنص العادي (4.5:1). هذا اللون الأغمق بنفس
+ * درجة اللون (Hue ≈ 181°) يحقق 4.82:1 (محسوبة بمعادلة WCAG رسميًا)، ويُطبَّق
+ * فقط حيث تجتمع bg-primary-600 مع text-white فعليًا (أزرار Unfold، رابط
+ * التصفية النشط، شارة الأيقونة...)، دون تغيير قيمة primary-600 نفسها في أي
+ * مكان آخر (الحدود، الروابط، خلفية عناصر التحديد، حلقات التركيز) — تلك تبقى
+ * #40A595 حرفيًا كما هو مطلوب.
+ * ملاحظة: لا يغطي هذا حالات primary-600/text-white المبنية على متغيرات
+ * Tailwind الشرطية (dark:/group-[.active]:) لأنها كلاسات CSS مختلفة تمامًا؛
+ * راجع التقرير المرفق لتفاصيلها.
+ */
+.bg-primary-600.text-white {
+    background-color: oklch(54.3% 0.0781 181.115);
+}
+
+.bg-primary-600.text-white:hover {
+    filter: brightness(0.92);
+}
+
+/*
+ * خلايا جدول ChangeList (رأس وصفوف) تحمل كلاس text-left الفيزيائي دائمًا،
+ * لكنه لا يُنتَج من قالب .html قابل للنسخ — يُبنى برمجيًا في دالة Python
+ * items_for_result() (unfold/templatetags/unfold_list.py، ثابتا
+ * TABLE_CELL_CLASSES وTABLE_ACTION_CELL_CLASSES)، فلا توجد آلية Django
+ * الرسمية لتجاوز قوالب لتغييره. #result_list هو المعرّف (id) الوحيد لجدول
+ * القائمة نفسه (change_list_results.html)، فيقتصر الاستهداف عليه فقط ولا
+ * يمس text-left في أي مكان آخر بالموقع (تلك المواضع الأخرى عُولجت بنسخ
+ * قوالبها مباشرة بدل CSS).
+ */
+#result_list .text-left {
+    text-align: right;
+}

@@ -173,3 +173,42 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# django-unfold admin theme
+# RTL itself needs no setting here: Unfold's base template sets
+# `dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}"` from Django's own
+# {% get_current_language_bidi %}, and LANGUAGE_CODE="ar-sa" above is
+# already bidi — verified: dir="rtl" is already present on every admin
+# page. The primary color and site branding are set via Unfold's own
+# official settings below; static/css/admin-custom.css (loaded through
+# the official STYLES hook) only fixes the handful of spots Unfold ships
+# no official setting for (see that file's comments and the task report).
+UNFOLD = {
+    "SITE_TITLE": "لوحة تحكم جُمان",
+    "SITE_HEADER": "لوحة تحكم جُمان",
+    "STYLES": [
+        "/static/css/admin-custom.css",
+    ],
+    "COLORS": {
+        # Juman's brand teal (#40A595) replacing Unfold's default purple.
+        # Shade "600" is the exact brand hex — it's the shade Unfold's own
+        # templates/widgets use for buttons, active nav links, focus
+        # rings, and checked states (bg-primary-600 / border-primary-600).
+        # The rest of the ramp (50-950) is #40A595 tinted toward white /
+        # shaded toward black at the same hue, so light/dark-mode surfaces
+        # stay a coherent teal instead of just recoloring one shade.
+        "primary": {
+            "50": "oklch(98.1% 0.0053 197.070)",
+            "100": "oklch(95.8% 0.0130 185.094)",
+            "200": "oklch(91.0% 0.0292 183.304)",
+            "300": "oklch(85.3% 0.0450 184.007)",
+            "400": "oklch(76.5% 0.0717 183.233)",
+            "500": "oklch(70.6% 0.0853 182.689)",
+            "600": "oklch(65.9% 0.0964 180.967)",  # #40A595
+            "700": "oklch(58.1% 0.0844 180.539)",
+            "800": "oklch(49.9% 0.0707 180.962)",
+            "900": "oklch(41.5% 0.0583 180.410)",
+            "950": "oklch(33.8% 0.0455 181.973)",
+        },
+    },
+}
